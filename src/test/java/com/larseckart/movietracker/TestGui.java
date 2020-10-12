@@ -72,7 +72,7 @@ public class TestGui {
   }
 
   @Test
-  void selecting_another() throws Exception {
+  void selecting_another() {
     mockView.setMovies(movies);
 
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
@@ -80,5 +80,24 @@ public class TestGui {
     editor.select(0);
 
     verify(mockView).setName("Star Wars");
+  }
+
+  @Test
+  void updating() {
+    Vector<Movie> newMovies = new Vector<>();
+    newMovies.add(starWars);
+    newMovies.add(new Movie("Star Trek I"));
+    newMovies.add(starGate);
+
+    given(mockView.getNewName()).willReturn("Star Trek I");
+
+    MovieListEditor editor = new MovieListEditor(movieList, mockView);
+    editor.select(1);
+    editor.update();
+
+    //verify(mockView).setMovies(movies);
+    verify(mockView).setName("Star Trek");
+    verify(mockView).getNewName();
+    //verify(mockView).setMovies(newMovies);
   }
 }

@@ -95,4 +95,25 @@ class TestSwingMovieListEditorView {
     JTextFieldOperator newMovieField = new JTextFieldOperator(mainWindow);
     assertThat(newMovieField.getText()).isEqualTo("Star Trek");
   }
+
+  @Test
+  void updating() {
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JListOperator movieList = new JListOperator(mainWindow);
+    movieList.clickOnItem(1, 1);
+
+    JTextFieldOperator newMovieField = new JTextFieldOperator(mainWindow);
+    newMovieField.setText("Star Trek I");
+
+    JButtonOperator updateButton = new JButtonOperator(mainWindow, "Update");
+    updateButton.doClick();
+
+    movieList.clickOnItem(0, 1);
+    movieList.clickOnItem(1, 1);
+
+    assertThat(newMovieField.getText()).isEqualTo("Star Trek I");
+  }
 }

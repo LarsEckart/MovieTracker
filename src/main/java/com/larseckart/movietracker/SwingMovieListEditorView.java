@@ -49,7 +49,8 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     setLayout();
     initList();
     initField();
-    initButton();
+    initAddButton();
+    initUpdateButton();
     pack();
   }
 
@@ -67,10 +68,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     movieList.addListSelectionListener(new ListSelectionListener() {
       @Override
       public void valueChanged(ListSelectionEvent e) {
-        int selectedIndex = movieList.getSelectedIndex();
-        if (selectedIndex != -1) {
-          myEditor.select(selectedIndex);
-        }
+        myEditor.select(movieList.getSelectedIndex());
       }
     });
     JScrollPane scroller =
@@ -86,7 +84,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     getContentPane().add(movieField);
   }
 
-  private void initButton() {
+  private void initAddButton() {
     JButton addButton = new JButton("Add");
     getContentPane().add(addButton);
     addButton.addActionListener(new ActionListener() {
@@ -94,6 +92,18 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
       @Override
       public void actionPerformed(ActionEvent e) {
         myEditor.add();
+      }
+    });
+  }
+
+  private void initUpdateButton() {
+    JButton updateButton = new JButton("Update");
+    getContentPane().add(updateButton);
+    updateButton.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        myEditor.update();
       }
     });
   }
