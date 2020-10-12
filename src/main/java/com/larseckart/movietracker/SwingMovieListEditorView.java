@@ -44,6 +44,11 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     myEditor = anEditor;
   }
 
+  @Override
+  public void duplicateException(String name) {
+
+  }
+
   public void init() {
     setTitle();
     setLayout();

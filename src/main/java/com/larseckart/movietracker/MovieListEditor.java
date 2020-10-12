@@ -17,9 +17,14 @@ public class MovieListEditor {
   }
 
   public void add() {
-    Movie newMovie = new Movie(aView.getNewName());
-    movieList.add(newMovie);
-    updateMovieList();
+    String newName = aView.getNewName();
+    try {
+      Movie newMovie = new Movie(newName);
+      movieList.add(newMovie);
+      updateMovieList();
+    } catch (DuplicateMovieException e) {
+      aView.duplicateException(newName);
+    }
   }
 
   public void select(int index) {

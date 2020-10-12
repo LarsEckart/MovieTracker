@@ -99,4 +99,19 @@ public class TestGui {
     verify(mockView).getNewName();
     verify(mockView).setMovies(newMovies);
   }
+
+  @Test
+  void adding_duplicate() {
+    String LOST_IN_SPACE = "Lost in Space";
+    Movie lostInSpace = new Movie(LOST_IN_SPACE);
+    Vector<Movie> moviesWithAddition = new Vector<>(movies);
+    moviesWithAddition.add(lostInSpace);
+
+    given(mockView.getNewName()).willReturn("Star Wars");
+
+    MovieListEditor editor = new MovieListEditor(movieList, mockView);
+    editor.add();
+
+    verify(mockView).duplicateException("Star Wars");
+  }
 }
