@@ -9,6 +9,12 @@ public class Movie {
   private int numberOfRatings;
 
   public Movie(String name) {
+    if (name == null) {
+      throw new IllegalArgumentException("null Movie name");
+    }
+    if (name.isEmpty()) {
+      throw new IllegalArgumentException("empty Movie name");
+    }
     this.name = name;
   }
 

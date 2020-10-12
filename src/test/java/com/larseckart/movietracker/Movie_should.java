@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class Movie_should {
 
@@ -36,7 +37,19 @@ class Movie_should {
   void renaming() throws Exception {
     String newMovie = "Star Trek";
     Movie aMovie = new Movie("Star Wars");
+
     aMovie.rename(newMovie);
+
     assertThat(aMovie.getName()).isEqualTo(newMovie);
+  }
+
+  @Test
+  void null_name() throws Exception {
+    assertThrows(IllegalArgumentException.class, () -> new Movie(null));
+  }
+
+  @Test
+  void empty_name() throws Exception {
+    assertThrows(IllegalArgumentException.class, () -> new Movie(""));
   }
 }
