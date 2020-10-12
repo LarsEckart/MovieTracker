@@ -5,11 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Vector;
 import javax.swing.ListModel;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 import org.netbeans.jemmy.operators.JButtonOperator;
+import org.netbeans.jemmy.operators.JDialogOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
+import org.netbeans.jemmy.operators.JLabelOperator;
 import org.netbeans.jemmy.operators.JListOperator;
 import org.netbeans.jemmy.operators.JTextFieldOperator;
 
@@ -115,5 +118,27 @@ class TestSwingMovieListEditorView {
     movieList.clickOnItem(1, 1);
 
     assertThat(newMovieField.getText()).isEqualTo("Star Trek I");
+  }
+
+  @Disabled("somehow doesnt find the text although it's there")
+  @Test
+  void duplicate_caused_by_add() {
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JTextFieldOperator newMovieField = new JTextFieldOperator(mainWindow);
+    newMovieField.enterText(starWars.getName());
+
+    JButtonOperator addButton = new JButtonOperator(mainWindow, "Add");
+    addButton.pushNoBlock();
+
+    JDialogOperator messageDialog = new JDialogOperator("Duplicate Movie");
+    JLabelOperator message = new JLabelOperator(messageDialog);
+
+    assertThat(message.getText()).isEqualTo("That would result in a duplicate Movie.");
+
+    JButtonOperator okButton = new JButtonOperator(messageDialog, "OK");
+    okButton.doClick();
   }
 }

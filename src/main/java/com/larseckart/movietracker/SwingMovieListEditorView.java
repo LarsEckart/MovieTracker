@@ -7,6 +7,7 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -46,7 +47,11 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
 
   @Override
   public void duplicateException(String name) {
-
+    JOptionPane
+        .showMessageDialog(this,
+            "That would result in a duplicate Movie.",
+            "Duplicate Movie",
+            JOptionPane.ERROR_MESSAGE);
   }
 
   public void init() {

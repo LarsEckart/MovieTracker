@@ -114,4 +114,15 @@ public class TestGui {
 
     verify(mockView).duplicateException("Star Wars");
   }
+
+  @Test
+  void rename_duplicate() {
+    given(mockView.getNewName()).willReturn("Star Wars");
+
+    MovieListEditor editor = new MovieListEditor(movieList, mockView);
+    editor.select(1);
+    editor.update();
+
+    verify(mockView).duplicateException("Star Wars");
+  }
 }
