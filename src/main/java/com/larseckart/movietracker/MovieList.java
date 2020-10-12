@@ -13,6 +13,9 @@ public class MovieList {
   }
 
   public void add(Movie movie) {
+    if (movies.contains(movie)) {
+      throw new DuplicateMovieException(movie.getName());
+    }
     movies.add(movie);
   }
 
