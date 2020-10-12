@@ -31,4 +31,12 @@ class Movie_should {
 
     assertThat(movie.getAverageRating()).isEqualTo(4);
   }
+
+  @Test
+  void renaming() throws Exception {
+    String newMovie = "Star Trek";
+    Movie aMovie = new Movie("Star Wars");
+    aMovie.rename(newMovie);
+    assertThat(aMovie.getName()).isEqualTo(newMovie);
+  }
 }

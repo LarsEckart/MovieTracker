@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Movie {
 
-  private final String name;
+  private String name;
   private int totalRating;
   private int numberOfRatings;
 
@@ -45,5 +45,9 @@ public class Movie {
   @Override
   public int hashCode() {
     return Objects.hash(name);
+  }
+
+  public void rename(String newName) {
+    name = newName;
   }
 }
