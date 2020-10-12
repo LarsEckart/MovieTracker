@@ -11,6 +11,7 @@ public class MovieListEditor {
     this.movieList = movieList;
     this.aView = aView;
     aView.setMovies(new Vector<>(movieList.getMovies()));
+    aView.setEditor(this);
   }
 
   public void add() {

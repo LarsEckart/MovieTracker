@@ -4,8 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
+import org.netbeans.jemmy.operators.JButtonOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JListOperator;
+import org.netbeans.jemmy.operators.JTextFieldOperator;
 
 import java.util.Vector;
 
@@ -48,6 +50,30 @@ class TestSwingMovieListEditorView {
     mainWindow = new JFrameOperator("Movie List");
     MovieListEditor editor =
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JListOperator movieList = new JListOperator(mainWindow);
+    ListModel listModel = movieList.getModel();
+    assertThat(listModel.getSize()).isEqualTo(movies.size());
+    for (int i = 0; i < movies.size(); i++) {
+      assertThat(movies.get(i)).isEqualTo(listModel.getElementAt(i));
+    }
+  }
+
+  @Test
+  void name() throws Exception {
+    String LOST_IN_SPACE = "Lost In Space";
+    Movie lostInSpace = new Movie(LOST_IN_SPACE);
+    movies.add(lostInSpace);
+
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+            new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JTextFieldOperator newMovieField = new JTextFieldOperator(mainWindow);
+    newMovieField.enterText(LOST_IN_SPACE);
+
+    JButtonOperator addButton = new JButtonOperator(mainWindow, "Add");
+    addButton.doClick();
 
     JListOperator movieList = new JListOperator(mainWindow);
     ListModel listModel = movieList.getModel();
