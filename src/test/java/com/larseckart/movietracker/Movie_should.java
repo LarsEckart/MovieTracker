@@ -52,4 +52,18 @@ class Movie_should {
   void empty_name() throws Exception {
     assertThrows(IllegalArgumentException.class, () -> new Movie(""));
   }
+
+  @Test
+  void rename_null_name() throws Exception {
+    Movie aMovie = new Movie("Star Wars");
+
+    assertThrows(IllegalArgumentException.class, () -> aMovie.rename(null));
+  }
+
+  @Test
+  void rename_empty_name() throws Exception {
+    Movie aMovie = new Movie("Star Wars");
+
+    assertThrows(IllegalArgumentException.class, () -> aMovie.rename(""));
+  }
 }

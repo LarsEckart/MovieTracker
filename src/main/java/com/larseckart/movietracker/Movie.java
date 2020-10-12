@@ -54,6 +54,12 @@ public class Movie {
   }
 
   public void rename(String newName) {
+    if (newName == null) {
+      throw new IllegalArgumentException("null Movie name");
+    }
+    if (newName.isEmpty()) {
+      throw new IllegalArgumentException("empty Movie name");
+    }
     name = newName;
   }
 }
