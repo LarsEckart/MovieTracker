@@ -4,7 +4,6 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -62,10 +61,10 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   private void initList() {
     movieList = new JList<>(new Vector<>());
     JScrollPane scroller =
-            new JScrollPane(
-                    movieList,
-                    ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                    ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        new JScrollPane(
+            movieList,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     getContentPane().add(scroller);
   }
 

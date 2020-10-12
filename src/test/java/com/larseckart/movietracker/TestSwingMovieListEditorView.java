@@ -1,5 +1,9 @@
 package com.larseckart.movietracker;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Vector;
+import javax.swing.ListModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
@@ -9,13 +13,9 @@ import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JListOperator;
 import org.netbeans.jemmy.operators.JTextFieldOperator;
 
-import java.util.Vector;
-
-import javax.swing.*;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-/** I couldn't get it to work on travis linux machine. */
+/**
+ * I couldn't get it to work on travis linux machine.
+ */
 @EnabledOnOs({OS.MAC})
 class TestSwingMovieListEditorView {
 
@@ -67,7 +67,7 @@ class TestSwingMovieListEditorView {
 
     mainWindow = new JFrameOperator("Movie List");
     MovieListEditor editor =
-            new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
     JTextFieldOperator newMovieField = new JTextFieldOperator(mainWindow);
     newMovieField.enterText(LOST_IN_SPACE);
