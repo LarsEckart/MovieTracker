@@ -60,7 +60,7 @@ class TestSwingMovieListEditorView {
   }
 
   @Test
-  void name() throws Exception {
+  void adding() throws Exception {
     String LOST_IN_SPACE = "Lost In Space";
     Movie lostInSpace = new Movie(LOST_IN_SPACE);
     movies.add(lostInSpace);
@@ -81,5 +81,18 @@ class TestSwingMovieListEditorView {
     for (int i = 0; i < movies.size(); i++) {
       assertThat(movies.get(i)).isEqualTo(listModel.getElementAt(i));
     }
+  }
+
+  @Test
+  void selecting() {
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JListOperator movieList = new JListOperator(mainWindow);
+    movieList.clickOnItem(1, 1);
+
+    JTextFieldOperator newMovieField = new JTextFieldOperator(mainWindow);
+    assertThat(newMovieField.getText()).isEqualTo("Star Trek");
   }
 }

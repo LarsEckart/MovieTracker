@@ -9,7 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class SwingMovieListEditorView extends JFrame implements MovieListEditorView {
 
@@ -60,6 +63,16 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
 
   private void initList() {
     movieList = new JList<>(new Vector<>());
+    movieList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    movieList.addListSelectionListener(new ListSelectionListener() {
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        int selectedIndex = movieList.getSelectedIndex();
+        if (selectedIndex != -1) {
+          myEditor.select(selectedIndex);
+        }
+      }
+    });
     JScrollPane scroller =
         new JScrollPane(
             movieList,

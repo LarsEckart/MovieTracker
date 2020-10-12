@@ -70,4 +70,15 @@ public class TestGui {
 
     verify(mockView).setName("Star Trek");
   }
+
+  @Test
+  void selecting_another() throws Exception {
+    mockView.setMovies(movies);
+
+    MovieListEditor editor = new MovieListEditor(movieList, mockView);
+
+    editor.select(0);
+
+    verify(mockView).setName("Star Wars");
+  }
 }
