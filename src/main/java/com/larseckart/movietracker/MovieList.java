@@ -2,24 +2,29 @@ package com.larseckart.movietracker;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class MovieList {
 
-  private final Collection<Movie> movies = new ArrayList<>();
+    private final List<Movie> movies = new ArrayList<>();
 
-  public int size() {
-    return movies.size();
-  }
+    public int size() {
+        return movies.size();
+    }
 
-  public void add(Movie movie) {
-    movies.add(movie);
-  }
+    public void add(Movie movie) {
+        movies.add(movie);
+    }
 
-  public boolean contains(Movie movie) {
-    return movies.contains(movie);
-  }
+    public boolean contains(Movie movie) {
+        return movies.contains(movie);
+    }
 
-  public Collection<Movie> getMovies() {
-    return this.movies;
-  }
+    public Collection<Movie> getMovies() {
+        return this.movies;
+    }
+
+    public Movie getMovie(int index) {
+        return movies.get(index);
+    }
 }

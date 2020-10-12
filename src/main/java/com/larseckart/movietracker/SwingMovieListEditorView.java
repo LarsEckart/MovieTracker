@@ -33,6 +33,11 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   }
 
   @Override
+  public void setName(String name) {
+    movieField.setText(name);
+  }
+
+  @Override
   public void setEditor(MovieListEditor anEditor) {
     myEditor = anEditor;
   }

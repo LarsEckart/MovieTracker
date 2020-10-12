@@ -19,4 +19,8 @@ public class MovieListEditor {
     movieList.add(newMovie);
     aView.setMovies(new Vector<>(movieList.getMovies()));
   }
+
+  public void select(int index) {
+    aView.setName(movieList.getMovie(index).getName());
+  }
 }

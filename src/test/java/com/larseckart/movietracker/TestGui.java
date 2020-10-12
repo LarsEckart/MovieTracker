@@ -60,4 +60,15 @@ public class TestGui {
         () -> verify(mockView).getNewName(),
         () -> verify(mockView).setMovies(moviesWithAddition));
   }
+
+  @Test
+  void selecting() throws Exception {
+    mockView.setMovies(movies);
+
+    MovieListEditor editor = new MovieListEditor(movieList, mockView);
+
+    editor.select(1);
+
+    verify(mockView).setName("Star Trek");
+  }
 }
