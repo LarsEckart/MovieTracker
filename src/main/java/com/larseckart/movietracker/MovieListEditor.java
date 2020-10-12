@@ -33,8 +33,7 @@ public class MovieListEditor {
 
   public void update() {
     if (selectedMovie != null) {
-      selectedMovie.rename(aView.getNewName());
-      updateMovieList();
+      movieList.rename(selectedMovie, aView.getNewName());
     }
   }
 

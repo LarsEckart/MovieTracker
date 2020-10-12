@@ -30,4 +30,13 @@ public class MovieList {
   public Movie getMovie(int index) {
     return movies.get(index);
   }
+
+  public void rename(Movie movie, String newName) {
+    Movie potentialMovie = new Movie(movie);
+    potentialMovie.rename(newName);
+    if (this.contains(potentialMovie)) {
+      throw new DuplicateMovieException(newName);
+    }
+    movie.rename(newName);
+  }
 }

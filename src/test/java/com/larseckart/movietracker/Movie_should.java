@@ -45,7 +45,8 @@ class Movie_should {
 
   @Test
   void null_name() throws Exception {
-    assertThrows(IllegalArgumentException.class, () -> new Movie(null));
+    String nullString = null;
+    assertThrows(IllegalArgumentException.class, () -> new Movie(nullString));
   }
 
   @Test
@@ -65,5 +66,13 @@ class Movie_should {
     Movie aMovie = new Movie("Star Wars");
 
     assertThrows(IllegalArgumentException.class, () -> aMovie.rename(""));
+  }
+
+  @Test
+  void copy_constructor() throws Exception {
+    Movie starWars = new Movie("Star Wars");
+    Movie copyOfStarWars = new Movie(starWars);
+    assertThat(copyOfStarWars).isNotSameAs(starWars);
+    assertThat(copyOfStarWars).isEqualTo(starWars);
   }
 }

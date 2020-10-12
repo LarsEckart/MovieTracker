@@ -14,6 +14,10 @@ public class Movie {
     this.name = name;
   }
 
+  public Movie(Movie movie) {
+    this.name = movie.name;
+  }
+
   private void checkEmpty(String name) {
     if (name.isEmpty()) {
       throw new IllegalArgumentException("empty Movie name");
