@@ -9,13 +9,15 @@ public class Movie {
   private int numberOfRatings;
 
   public Movie(String name) {
-    if (name == null) {
-      throw new IllegalArgumentException("null Movie name");
-    }
+    checkNull(name);
+    checkEmpty(name);
+    this.name = name;
+  }
+
+  private void checkEmpty(String name) {
     if (name.isEmpty()) {
       throw new IllegalArgumentException("empty Movie name");
     }
-    this.name = name;
   }
 
   public String getName() {
@@ -54,12 +56,14 @@ public class Movie {
   }
 
   public void rename(String newName) {
+    checkNull(newName);
+    checkEmpty(newName);
+    name = newName;
+  }
+
+  private void checkNull(String newName) {
     if (newName == null) {
       throw new IllegalArgumentException("null Movie name");
     }
-    if (newName.isEmpty()) {
-      throw new IllegalArgumentException("empty Movie name");
-    }
-    name = newName;
   }
 }
