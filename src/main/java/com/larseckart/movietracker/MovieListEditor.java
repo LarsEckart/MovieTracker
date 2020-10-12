@@ -19,7 +19,7 @@ public class MovieListEditor {
   public void add() {
     Movie newMovie = new Movie(aView.getNewName());
     movieList.add(newMovie);
-    aView.setMovies(new Vector<>(movieList.getMovies()));
+    updateMovieList();
   }
 
   public void select(int index) {
@@ -34,7 +34,11 @@ public class MovieListEditor {
   public void update() {
     if (selectedMovie != null) {
       selectedMovie.rename(aView.getNewName());
-      aView.setMovies(new Vector<>(movieList.getMovies()));
+      updateMovieList();
     }
+  }
+
+  private void updateMovieList() {
+    aView.setMovies(new Vector<>(movieList.getMovies()));
   }
 }

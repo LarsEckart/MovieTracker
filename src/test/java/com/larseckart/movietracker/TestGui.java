@@ -3,6 +3,7 @@ package com.larseckart.movietracker;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.Vector;
@@ -95,9 +96,8 @@ public class TestGui {
     editor.select(1);
     editor.update();
 
-    //verify(mockView).setMovies(movies);
     verify(mockView).setName("Star Trek");
     verify(mockView).getNewName();
-    //verify(mockView).setMovies(newMovies);
+    verify(mockView, times(2)).setMovies(newMovies);
   }
 }

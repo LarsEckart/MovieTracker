@@ -108,9 +108,10 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     });
   }
 
-  public static void start() {
+  public static SwingMovieListEditorView start() {
     SwingMovieListEditorView window = new SwingMovieListEditorView();
     window.init();
     window.setVisible(true);
+    return window;
   }
 }
