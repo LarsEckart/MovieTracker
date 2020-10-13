@@ -3,6 +3,7 @@ package com.larseckart.movietracker;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JList;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,5 +42,18 @@ class TestCustomListRenderer {
     assertThat(renderer.getText()).isEqualTo(starTrek.getName());
     assertThat(renderer.getIcon())
         .isEqualTo(CustomMovieListRenderer.iconForRating(starTrek.getRating()));
+  }
+
+  @Test
+  void unselected_colours() throws Exception {
+    list.setBackground(Color.BLUE);
+    list.setForeground(Color.RED);
+    list.setSelectionBackground(Color.RED);
+    list.setSelectionForeground(Color.BLUE);
+
+    renderer.getListCellRendererComponent(list, fotr, 1, false, false);
+
+    assertThat(renderer.getBackground()).isEqualTo(Color.BLUE);
+    assertThat(renderer.getForeground()).isEqualTo(Color.RED);
   }
 }

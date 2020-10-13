@@ -12,6 +12,9 @@ class CustomMovieListRenderer extends JLabel implements ListCellRenderer<Movie> 
   public Component getListCellRendererComponent(JList list, Movie value, int index,
       boolean isSelected, boolean cellHasFocus) {
 
+    setBackground(list.getBackground());
+    setForeground(list.getForeground());
+
     setText(value.getName());
     if (value.hasRating()) {
       setIcon(ratingIcons[value.getRating() + 1]);
