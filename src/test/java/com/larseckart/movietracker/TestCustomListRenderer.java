@@ -45,7 +45,7 @@ class TestCustomListRenderer {
   }
 
   @Test
-  void unselected_colours() throws Exception {
+  void unSelected_colours() throws Exception {
     list.setBackground(Color.BLUE);
     list.setForeground(Color.RED);
     list.setSelectionBackground(Color.RED);
@@ -55,5 +55,18 @@ class TestCustomListRenderer {
 
     assertThat(renderer.getBackground()).isEqualTo(Color.BLUE);
     assertThat(renderer.getForeground()).isEqualTo(Color.RED);
+  }
+
+  @Test
+  void selected_colours() throws Exception {
+    list.setBackground(Color.BLUE);
+    list.setForeground(Color.RED);
+    list.setSelectionBackground(Color.RED);
+    list.setSelectionForeground(Color.BLUE);
+
+    renderer.getListCellRendererComponent(list, fotr, 1, true, false);
+
+    assertThat(renderer.getBackground()).isEqualTo(Color.RED);
+    assertThat(renderer.getForeground()).isEqualTo(Color.BLUE);
   }
 }
