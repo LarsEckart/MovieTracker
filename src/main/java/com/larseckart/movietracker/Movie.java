@@ -7,15 +7,22 @@ public class Movie {
   private String name;
   private int totalRating;
   private int numberOfRatings;
+  private final int rating;
 
   public Movie(String name) {
+    this(name, -1);
+  }
+
+  public Movie(String name, int rating) {
     checkNull(name);
     checkEmpty(name);
     this.name = name;
+    this.rating = rating;
   }
 
   public Movie(Movie movie) {
     this.name = movie.name;
+    this.rating = movie.rating;
   }
 
   private void checkEmpty(String name) {
@@ -68,6 +75,18 @@ public class Movie {
   private void checkNull(String newName) {
     if (newName == null) {
       throw new IllegalArgumentException("null Movie name");
+    }
+  }
+
+  public boolean hasRating() {
+    return rating >= 0;
+  }
+
+  public int getRating() {
+    if (hasRating()) {
+      return rating;
+    } else {
+      throw new UnratedException();
     }
   }
 }
