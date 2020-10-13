@@ -49,14 +49,14 @@ public class TestGui {
     Vector<Movie> moviesWithAddition = new Vector<>(movies);
     moviesWithAddition.add(lostInSpace);
 
-    given(mockView.getNewName()).willReturn(LOST_IN_SPACE);
+    given(mockView.getNameField()).willReturn(LOST_IN_SPACE);
 
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
     editor.add();
 
     assertAll(
         () -> verify(mockView).setMovies(movies),
-        () -> verify(mockView).getNewName(),
+        () -> verify(mockView).getNameField(),
         () -> verify(mockView).setMovies(moviesWithAddition));
   }
 
@@ -70,10 +70,10 @@ public class TestGui {
     editor.select(1);
     editor.select(2);
 
-    verify(mockView).setName("Star Wars");
-    verify(mockView).setNewRating(6);
-    verify(mockView).setName("Star Trek");
-    verify(mockView).setNewRating(4);
+    verify(mockView).setNameField("Star Wars");
+    verify(mockView).setRatingField(6);
+    verify(mockView).setNameField("Star Trek");
+    verify(mockView).setRatingField(4);
   }
 
   @Test
@@ -84,7 +84,7 @@ public class TestGui {
 
     editor.select(0);
 
-    verify(mockView).setName("Star Wars");
+    verify(mockView).setNameField("Star Wars");
   }
 
   @Test
@@ -94,14 +94,14 @@ public class TestGui {
     newMovies.add(new Movie("Star Trek I"));
     newMovies.add(starGate);
 
-    given(mockView.getNewName()).willReturn("Star Trek I");
+    given(mockView.getNameField()).willReturn("Star Trek I");
 
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
     editor.select(1);
     editor.update();
 
-    verify(mockView).setName("Star Trek");
-    verify(mockView).getNewName();
+    verify(mockView).setNameField("Star Trek");
+    verify(mockView).getNameField();
     verify(mockView).setMovies(newMovies);
   }
 
@@ -112,7 +112,7 @@ public class TestGui {
     Vector<Movie> moviesWithAddition = new Vector<>(movies);
     moviesWithAddition.add(lostInSpace);
 
-    given(mockView.getNewName()).willReturn("Star Wars");
+    given(mockView.getNameField()).willReturn("Star Wars");
 
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
     editor.add();
@@ -122,7 +122,7 @@ public class TestGui {
 
   @Test
   void rename_duplicate() {
-    given(mockView.getNewName()).willReturn("Star Wars");
+    given(mockView.getNameField()).willReturn("Star Wars");
 
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
     editor.select(1);

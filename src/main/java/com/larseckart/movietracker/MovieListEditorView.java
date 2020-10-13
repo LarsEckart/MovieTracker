@@ -6,13 +6,13 @@ public interface MovieListEditorView {
 
   void setMovies(Vector<Movie> movies);
 
-  void setName(String name);
+  void setNameField(String name);
 
-  String getNewName();
+  void setRatingField(int rating);
+
+  String getNameField();
 
   void setEditor(MovieListEditor anEditor);
 
   void duplicateException(String name);
-
-  void setNewRating(int rating);
 }

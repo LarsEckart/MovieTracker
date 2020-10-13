@@ -17,7 +17,7 @@ public class MovieListEditor {
   }
 
   public void add() {
-    String newName = aView.getNewName();
+    String newName = aView.getNameField();
     try {
       Movie newMovie = new Movie(newName);
       movieList.add(newMovie);
@@ -32,19 +32,19 @@ public class MovieListEditor {
       selectedMovie = null;
     } else {
       selectedMovie = movieList.getMovie(index);
-      aView.setName(selectedMovie.getName());
+      aView.setNameField(selectedMovie.getName());
 
       try {
-        aView.setNewRating(selectedMovie.getRating() +1);
+        aView.setRatingField(selectedMovie.getRating() + 1);
       } catch (UnratedException e) {
-        aView.setNewRating(0);
+        aView.setRatingField(0);
       }
     }
   }
 
   public void update() {
     if (selectedMovie != null) {
-      String newName = aView.getNewName();
+      String newName = aView.getNameField();
       try {
         movieList.rename(selectedMovie, newName);
       } catch (DuplicateMovieException e) {

@@ -31,12 +31,12 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   }
 
   @Override
-  public String getNewName() {
+  public String getNameField() {
     return movieField.getText();
   }
 
   @Override
-  public void setName(String name) {
+  public void setNameField(String name) {
     movieField.setText(name);
   }
 
@@ -55,7 +55,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   }
 
   @Override
-  public void setNewRating(int rating) {
+  public void setRatingField(int rating) {
 
   }
 
