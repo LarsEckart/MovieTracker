@@ -84,7 +84,7 @@ class Movie_should {
   @Test
   void science_fiction_category_movie() throws Exception {
     Movie alien = new Movie("Alien", "Science Fiction");
-    assertThat(alien.getCategory()).isEqualTo("Science Fiction");
+    assertThat(alien.getCategory()).isEqualTo(Movie.SCIENCE_FICTION);
   }
 
   @Test
