@@ -78,17 +78,12 @@ class Movie_should {
 
   @Test
   void uncategorized_movie() throws Exception {
-    assertThat(movie.getCategory()).isEqualTo("Uncategorized");
+    assertThat(movie.getCategory()).isEqualTo(Category.UNCATEGORIZED);
   }
 
   @Test
   void science_fiction_category_movie() throws Exception {
-    Movie alien = new Movie("Alien", "Science Fiction");
-    assertThat(alien.getCategory()).isEqualTo(Movie.SCIENCE_FICTION);
-  }
-
-  @Test
-  void bad_category() throws Exception {
-    assertThrows(IllegalArgumentException.class, () -> new Movie("Alien", "SciFi"));
+    Movie alien = new Movie("Alien", Category.SCIFI);
+    assertThat(alien.getCategory()).isEqualTo(Category.SCIFI);
   }
 }

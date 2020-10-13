@@ -4,10 +4,7 @@ import java.util.Objects;
 
 public class Movie {
 
-  public static final String UNCATEGORIZED = "Uncategorized";
-  public static final String SCIENCE_FICTION = "Science Fiction";
-  public static final String HORROR = "Horror";
-  private String category;
+  private Category category;
   private String name;
   private int totalRating;
   private int numberOfRatings;
@@ -27,33 +24,16 @@ public class Movie {
     this.category = movie.category;
   }
 
-  public Movie(String name, String category) {
+  public Movie(String name, Category category) {
     this(name, category, -1);
   }
 
-  public Movie(String name, String category, int rating) {
+  public Movie(String name, Category category, int rating) {
     checkNull(name);
     checkEmpty(name);
-    checkCategory(category);
     this.name = name;
-    this.category = (category != null) ? category : UNCATEGORIZED;
+    this.category = (category != null) ? category : Category.UNCATEGORIZED;
     this.rating = rating;
-  }
-
-  private void checkCategory(String category) {
-    if (category == null) {
-      return;
-    }
-    if (UNCATEGORIZED.equals(category)) {
-      return;
-    }
-    if (SCIENCE_FICTION.equals(category)) {
-      return;
-    }
-    if (HORROR.equals(category)) {
-      return;
-    }
-    throw new IllegalArgumentException("Bad category: " + category);
   }
 
   private void checkEmpty(String name) {
@@ -125,7 +105,7 @@ public class Movie {
     this.rating = rating;
   }
 
-  public String getCategory() {
+  public Category getCategory() {
     return category;
   }
 }
