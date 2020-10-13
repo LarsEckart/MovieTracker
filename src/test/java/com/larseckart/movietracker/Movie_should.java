@@ -86,4 +86,9 @@ class Movie_should {
     Movie alien = new Movie("Alien", "Science Fiction");
     assertThat(alien.getCategory()).isEqualTo("Science Fiction");
   }
+
+  @Test
+  void bad_category() throws Exception {
+    assertThrows(IllegalArgumentException.class, () -> new Movie("Alien", "SciFi"));
+  }
 }

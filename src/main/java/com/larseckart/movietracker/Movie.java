@@ -31,9 +31,26 @@ public class Movie {
   public Movie(String name, String category, int rating) {
     checkNull(name);
     checkEmpty(name);
+    checkCategory(category);
     this.name = name;
     this.category = (category != null) ? category : "Uncategorized";
     this.rating = rating;
+  }
+
+  private void checkCategory(String category) {
+    if (category == null) {
+      return;
+    }
+    if ("Uncategorized".equals(category)) {
+      return;
+    }
+    if ("Science Fiction".equals(category)) {
+      return;
+    }
+    if ("Horror".equals(category)) {
+      return;
+    }
+    throw new IllegalArgumentException("Bad category: " + category);
   }
 
   private void checkEmpty(String name) {
