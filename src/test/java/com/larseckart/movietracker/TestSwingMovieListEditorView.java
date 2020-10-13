@@ -16,6 +16,7 @@ import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JLabelOperator;
 import org.netbeans.jemmy.operators.JListOperator;
 import org.netbeans.jemmy.operators.JTextFieldOperator;
+import org.netbeans.jemmy.util.NameComponentChooser;
 
 /**
  * I couldn't get it to work on travis linux machine.
@@ -28,25 +29,29 @@ class TestSwingMovieListEditorView {
   private Movie starWars;
   private Movie starTrek;
   private Movie starGate;
+  private Movie theShining;
   private Vector<Object> movies;
 
   @BeforeEach
   void setUp() {
     SwingMovieListEditorView.start();
     movieList = new MovieList();
-    starWars = new Movie("Star Wars", 5);
-    starTrek = new Movie("Star Trek", 3);
-    starGate = new Movie("Stargate");
+    starWars = new Movie("Star Wars", Category.SCIFI, 5);
+    starTrek = new Movie("Star Trek", Category.SCIFI, 3);
+    starGate = new Movie("Stargate", Category.SCIFI);
+    theShining = new Movie("The Shining", Category.HORROR, 2);
 
     movies = new Vector<>();
     movies.add(starWars);
     movies.add(starTrek);
     movies.add(starGate);
+    movies.add(theShining);
 
     movieList = new MovieList();
     movieList.add(starWars);
     movieList.add(starTrek);
     movieList.add(starGate);
+    movieList.add(theShining);
   }
 
   @Test
@@ -143,6 +148,24 @@ class TestSwingMovieListEditorView {
     JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow);
     movieList.clickOnItem(0, 1);
     assertThat(ratingCombo.getSelectedIndex()).isEqualTo(6);
+  }
+
+  @Test
+  void select_updates_category() {
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JListOperator movieList = new JListOperator(mainWindow);
+    JTextFieldOperator categoryField = new JTextFieldOperator(mainWindow,
+        new NameComponentChooser("category"));
+
+    movieList.clickOnItem(0, 1);
+    assertThat(categoryField.getText()).isEqualTo(Category.SCIFI.toString());
+    movieList.clickOnItem(3, 1);
+    assertThat(categoryField.getText()).isEqualTo(Category.HORROR.toString());
+    movieList.clickOnItem(1, 1);
+    assertThat(categoryField.getText()).isEqualTo(Category.SCIFI.toString());
   }
 
   @Test

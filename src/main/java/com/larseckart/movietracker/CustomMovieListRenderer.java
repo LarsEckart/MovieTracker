@@ -35,8 +35,8 @@ class CustomMovieListRenderer extends JLabel implements ListCellRenderer<Movie> 
     return this;
   }
 
-  public static Vector icons() {
-    return new Vector(Arrays.asList(ratingIcons));
+  public static Vector<ImageIcon> icons() {
+    return new Vector<>(Arrays.asList(ratingIcons));
   }
 
   private static ImageIcon[] ratingIcons = {

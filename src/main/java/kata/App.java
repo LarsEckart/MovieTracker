@@ -1,5 +1,6 @@
 package kata;
 
+import com.larseckart.movietracker.Category;
 import com.larseckart.movietracker.Movie;
 import com.larseckart.movietracker.MovieList;
 import com.larseckart.movietracker.MovieListEditor;
@@ -11,7 +12,7 @@ class App {
   public static void main(String[] args) throws IOException {
     SwingMovieListEditorView window = SwingMovieListEditorView.start();
     MovieList movieList = new MovieList();
-    movieList.add(new Movie("Lars"));
+    movieList.add(new Movie("Lars", Category.COMEDY));
     movieList.add(new Movie("Lars0", 0));
     movieList.add(new Movie("Lars1", 1));
     movieList.add(new Movie("Lars2", 2));
