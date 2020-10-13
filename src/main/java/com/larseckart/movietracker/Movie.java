@@ -93,4 +93,8 @@ public class Movie {
   public void setRating(int rating) {
     this.rating = rating;
   }
+
+  public String getCategory() {
+    return "Uncategorized";
+  }
 }

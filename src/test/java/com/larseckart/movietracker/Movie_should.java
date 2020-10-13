@@ -75,4 +75,9 @@ class Movie_should {
     assertThat(copyOfStarWars).isNotSameAs(starWars);
     assertThat(copyOfStarWars).isEqualTo(starWars);
   }
+
+  @Test
+  void uncategorized_movie() throws Exception {
+    assertThat(movie.getCategory()).isEqualTo("Uncategorized");
+  }
 }
