@@ -3,6 +3,7 @@ package com.larseckart.movietracker;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.Vector;
@@ -17,22 +18,26 @@ public class TestGui {
   private Movie starTrek;
   private Movie starGate;
   private MovieList movieList;
+  private Movie theShining;
 
   @BeforeEach
   void setUp() {
-    starWars = new Movie("Star Wars", 5);
-    starTrek = new Movie("Star Trek", 3);
-    starGate = new Movie("Stargate");
+    starWars = new Movie("Star Wars", Category.SCIFI, 5);
+    starTrek = new Movie("Star Trek", Category.SCIFI, 3);
+    starGate = new Movie("Stargate", Category.SCIFI);
+    theShining = new Movie("The Shining", Category.HORROR, 2);
 
     movies = new Vector<>();
     movies.add(starWars);
     movies.add(starTrek);
     movies.add(starGate);
+    movies.add(theShining);
 
     movieList = new MovieList();
     movieList.add(starWars);
     movieList.add(starTrek);
     movieList.add(starGate);
+    movieList.add(theShining);
     mockView = mock(MovieListEditorView.class);
   }
 
@@ -67,16 +72,24 @@ public class TestGui {
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
 
     editor.select(0);
+    editor.select(1);
+    editor.select(2);
+    editor.select(3);
+
     verify(mockView).setNameField("Star Wars");
     verify(mockView).setRatingField(6);
 
-    editor.select(1);
     verify(mockView).setNameField("Star Trek");
     verify(mockView).setRatingField(4);
 
-    editor.select(2);
     verify(mockView).setNameField("Stargate");
     verify(mockView).setRatingField(0);
+
+    verify(mockView, times(3)).setCategoryField(Category.SCIFI);
+
+    verify(mockView).setNameField("The Shining");
+    verify(mockView).setRatingField(3);
+    verify(mockView).setCategoryField(Category.HORROR);
   }
 
   @Test

@@ -33,6 +33,7 @@ public class MovieListEditor {
     } else {
       selectedMovie = movies.getMovie(index);
       aView.setNameField(selectedMovie.getName());
+      aView.setCategoryField(selectedMovie.getCategory());
 
       try {
         aView.setRatingField(selectedMovie.getRating() + 1);

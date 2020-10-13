@@ -17,4 +17,6 @@ public interface MovieListEditorView {
   void setEditor(MovieListEditor anEditor);
 
   void duplicateException(String name);
+
+  void setCategoryField(Category category);
 }
