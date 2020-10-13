@@ -7,7 +7,7 @@ public class Movie {
   private String name;
   private int totalRating;
   private int numberOfRatings;
-  private final int rating;
+  private int rating;
 
   public Movie(String name) {
     this(name, -1);
@@ -88,5 +88,9 @@ public class Movie {
     } else {
       throw new UnratedException();
     }
+  }
+
+  public void setRating(int rating) {
+    this.rating = rating;
   }
 }

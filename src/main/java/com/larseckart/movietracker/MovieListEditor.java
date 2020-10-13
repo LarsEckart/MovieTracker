@@ -4,13 +4,13 @@ import java.util.Vector;
 
 public class MovieListEditor {
 
-  private final MovieList movieList;
+  private final MovieList movies;
   private final MovieListEditorView aView;
 
   private Movie selectedMovie;
 
   public MovieListEditor(MovieList movieList, MovieListEditorView aView) {
-    this.movieList = movieList;
+    this.movies = movieList;
     this.aView = aView;
     aView.setMovies(new Vector<>(movieList.getMovies()));
     aView.setEditor(this);
@@ -20,7 +20,7 @@ public class MovieListEditor {
     String newName = aView.getNameField();
     try {
       Movie newMovie = new Movie(newName);
-      movieList.add(newMovie);
+      movies.add(newMovie);
       updateMovieList();
     } catch (DuplicateMovieException e) {
       aView.duplicateException(newName);
@@ -31,7 +31,7 @@ public class MovieListEditor {
     if (index == -1) {
       selectedMovie = null;
     } else {
-      selectedMovie = movieList.getMovie(index);
+      selectedMovie = movies.getMovie(index);
       aView.setNameField(selectedMovie.getName());
 
       try {
@@ -46,7 +46,9 @@ public class MovieListEditor {
     if (selectedMovie != null) {
       String newName = aView.getNameField();
       try {
-        movieList.rename(selectedMovie, newName);
+        movies.rename(selectedMovie, newName);
+        selectedMovie.setRating(aView.getRatingField());
+        updateMovieList();
       } catch (DuplicateMovieException e) {
         aView.duplicateException(newName);
       }
@@ -54,6 +56,6 @@ public class MovieListEditor {
   }
 
   private void updateMovieList() {
-    aView.setMovies(new Vector<>(movieList.getMovies()));
+    aView.setMovies(new Vector<>(movies.getMovies()));
   }
 }

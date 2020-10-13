@@ -12,6 +12,8 @@ public interface MovieListEditorView {
 
   String getNameField();
 
+  int getRatingField();
+
   void setEditor(MovieListEditor anEditor);
 
   void duplicateException(String name);
