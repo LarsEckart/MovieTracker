@@ -45,14 +45,22 @@ public class MovieListEditor {
   public void update() {
     if (selectedMovie != null) {
       String newName = aView.getNameField();
-      try {
-        movies.rename(selectedMovie, newName);
-        selectedMovie.setRating(aView.getRatingField());
-        updateMovieList();
-      } catch (DuplicateMovieException e) {
-        aView.duplicateException(newName);
+      if (selectedMovie.getName().equals(newName)) {
+        updateMovieRating();
+      } else {
+        try {
+          movies.rename(selectedMovie, newName);
+          updateMovieRating();
+          updateMovieList();
+        } catch (DuplicateMovieException e) {
+          aView.duplicateException(newName);
+        }
       }
     }
+  }
+
+  private void updateMovieRating() {
+    selectedMovie.setRating(aView.getRatingField() - 1);
   }
 
   private void updateMovieList() {

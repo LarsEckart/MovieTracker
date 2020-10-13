@@ -131,8 +131,35 @@ class TestSwingMovieListEditorView {
     JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow);
     movieList.clickOnItem(0, 1);
     assertThat(ratingCombo.getSelectedIndex()).isEqualTo(6);
+  }
 
+  @Test
+  void select_updates_rating_with_same_name() {
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
+    JListOperator movieList = new JListOperator(mainWindow);
+    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow);
+    movieList.clickOnItem(0, 1);
+    assertThat(ratingCombo.getSelectedIndex()).isEqualTo(6);
+  }
+
+  @Test
+  void test_update_rating() {
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JListOperator movieList = new JListOperator(mainWindow);
+    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow);
+    movieList.clickOnItem(0, 1);
+    ratingCombo.setSelectedIndex(4);
+    JButtonOperator updateButton = new JButtonOperator(mainWindow, "Update");
+    updateButton.pushNoBlock();
+    movieList.clickOnItem(1, 1);
+    movieList.clickOnItem(0, 1);
+    assertThat(ratingCombo.getSelectedIndex()).isEqualTo(4);
   }
 
   @Disabled("somehow doesnt find the text although it's there")
