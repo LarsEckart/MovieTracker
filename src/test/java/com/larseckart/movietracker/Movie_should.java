@@ -80,4 +80,10 @@ class Movie_should {
   void uncategorized_movie() throws Exception {
     assertThat(movie.getCategory()).isEqualTo("Uncategorized");
   }
+
+  @Test
+  void science_fiction_category_movie() throws Exception {
+    Movie alien = new Movie("Alien", "Science Fiction");
+    assertThat(alien.getCategory()).isEqualTo("Science Fiction");
+  }
 }

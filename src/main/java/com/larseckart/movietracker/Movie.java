@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Movie {
 
+  private String category;
   private String name;
   private int totalRating;
   private int numberOfRatings;
@@ -14,15 +15,25 @@ public class Movie {
   }
 
   public Movie(String name, int rating) {
-    checkNull(name);
-    checkEmpty(name);
-    this.name = name;
-    this.rating = rating;
+    this(name, null, rating);
   }
 
   public Movie(Movie movie) {
     this.name = movie.name;
     this.rating = movie.rating;
+    this.category = movie.category;
+  }
+
+  public Movie(String name, String category) {
+    this(name, category, -1);
+  }
+
+  public Movie(String name, String category, int rating) {
+    checkNull(name);
+    checkEmpty(name);
+    this.name = name;
+    this.category = (category != null) ? category : "Uncategorized";
+    this.rating = rating;
   }
 
   private void checkEmpty(String name) {
@@ -95,6 +106,6 @@ public class Movie {
   }
 
   public String getCategory() {
-    return "Uncategorized";
+    return category;
   }
 }
