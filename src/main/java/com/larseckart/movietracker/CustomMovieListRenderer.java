@@ -1,6 +1,8 @@
 package com.larseckart.movietracker;
 
 import java.awt.Component;
+import java.util.Arrays;
+import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -31,6 +33,10 @@ class CustomMovieListRenderer extends JLabel implements ListCellRenderer<Movie> 
       setIcon(ratingIcons[0]);
     }
     return this;
+  }
+
+  public static Vector icons() {
+    return new Vector(Arrays.asList(ratingIcons));
   }
 
   private static ImageIcon[] ratingIcons = {

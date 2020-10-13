@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 import org.netbeans.jemmy.operators.JButtonOperator;
+import org.netbeans.jemmy.operators.JComboBoxOperator;
 import org.netbeans.jemmy.operators.JDialogOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JLabelOperator;
@@ -33,8 +34,8 @@ class TestSwingMovieListEditorView {
   void setUp() {
     SwingMovieListEditorView.start();
     movieList = new MovieList();
-    starWars = new Movie("Star Wars");
-    starTrek = new Movie("Star Trek");
+    starWars = new Movie("Star Wars", 5);
+    starTrek = new Movie("Star Trek", 3);
     starGate = new Movie("Stargate");
 
     movies = new Vector<>();
@@ -118,6 +119,20 @@ class TestSwingMovieListEditorView {
     movieList.clickOnItem(1, 1);
 
     assertThat(newMovieField.getText()).isEqualTo("Star Trek I");
+  }
+
+  @Test
+  void select_updates_rating() {
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JListOperator movieList = new JListOperator(mainWindow);
+    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow);
+    movieList.clickOnItem(0, 1);
+    assertThat(ratingCombo.getSelectedIndex()).isEqualTo(6);
+
+
   }
 
   @Disabled("somehow doesnt find the text although it's there")
