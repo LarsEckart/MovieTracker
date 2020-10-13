@@ -54,6 +54,11 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
             JOptionPane.ERROR_MESSAGE);
   }
 
+  @Override
+  public void setNewRating(int rating) {
+
+  }
+
   public void init() {
     setTitle();
     setLayout();

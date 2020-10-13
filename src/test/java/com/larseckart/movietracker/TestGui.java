@@ -20,8 +20,8 @@ public class TestGui {
 
   @BeforeEach
   void setUp() {
-    starWars = new Movie("Star Wars");
-    starTrek = new Movie("Star Trek");
+    starWars = new Movie("Star Wars", 5);
+    starTrek = new Movie("Star Trek", 3);
     starGate = new Movie("Stargate");
 
     movies = new Vector<>();
@@ -66,9 +66,14 @@ public class TestGui {
 
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
 
+    editor.select(0);
     editor.select(1);
+    editor.select(2);
 
+    verify(mockView).setName("Star Wars");
+    verify(mockView).setNewRating(6);
     verify(mockView).setName("Star Trek");
+    verify(mockView).setNewRating(4);
   }
 
   @Test

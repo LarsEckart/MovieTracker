@@ -33,6 +33,12 @@ public class MovieListEditor {
     } else {
       selectedMovie = movieList.getMovie(index);
       aView.setName(selectedMovie.getName());
+
+      try {
+        aView.setNewRating(selectedMovie.getRating() +1);
+      } catch (UnratedException e) {
+        aView.setNewRating(0);
+      }
     }
   }
 

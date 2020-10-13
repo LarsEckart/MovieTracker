@@ -1,5 +1,5 @@
 package com.larseckart.movietracker;
 
-class UnratedException extends RuntimeException {
+class UnratedException extends Exception {
 
 }

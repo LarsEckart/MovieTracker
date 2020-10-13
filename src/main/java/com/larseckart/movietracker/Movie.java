@@ -82,7 +82,7 @@ public class Movie {
     return rating >= 0;
   }
 
-  public int getRating() {
+  public int getRating() throws UnratedException {
     if (hasRating()) {
       return rating;
     } else {

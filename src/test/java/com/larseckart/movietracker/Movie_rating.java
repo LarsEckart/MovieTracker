@@ -14,7 +14,7 @@ class Movie_rating {
   }
 
   @Test
-  void rated() {
+  void rated() throws UnratedException {
     Movie lotr = new Movie("Lord of the Rings", 5);
     assertThat(lotr.hasRating()).isTrue();
     assertThat(lotr.getRating()).isEqualTo(5);

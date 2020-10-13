@@ -22,7 +22,11 @@ class CustomMovieListRenderer extends JLabel implements ListCellRenderer<Movie> 
 
     setText(value.getName());
     if (value.hasRating()) {
-      setIcon(ratingIcons[value.getRating() + 1]);
+      try {
+        setIcon(ratingIcons[value.getRating() + 1]);
+      } catch (UnratedException e) {
+
+      }
     } else {
       setIcon(ratingIcons[0]);
     }

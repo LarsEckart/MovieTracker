@@ -32,7 +32,7 @@ class TestCustomListRenderer {
   }
 
   @Test
-  void contents() {
+  void contents() throws Exception {
     renderer.getListCellRendererComponent(list, fotr, 1, false, false);
     assertThat(renderer.getText()).isEqualTo(fotr.getName());
     assertThat(renderer.getIcon())
