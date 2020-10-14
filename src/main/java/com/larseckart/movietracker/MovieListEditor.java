@@ -20,6 +20,7 @@ public class MovieListEditor {
     String newName = aView.getNameField();
     try {
       Movie newMovie = new Movie(newName);
+      // TODO: rating and category ignored right now. update add related test(s) and make them green
       movies.add(newMovie);
       updateMovieList();
     } catch (DuplicateMovieException e) {
