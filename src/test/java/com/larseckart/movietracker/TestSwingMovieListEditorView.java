@@ -140,21 +140,21 @@ class TestSwingMovieListEditorView {
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
     JListOperator movieList = new JListOperator(mainWindow);
-    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow, new NameComponentChooser("rating"));
+    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow,
+        new NameComponentChooser("rating"));
     movieList.clickOnItem(0, 1);
     assertThat(ratingCombo.getSelectedIndex()).isEqualTo(6);
   }
 
-  @Disabled("alone it passes, when all tests, it has the list (debugged it) but doesnt display it")
   @Test
   void select_updates_category() {
     mainWindow = new JFrameOperator("Movie List");
     MovieListEditor editor =
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
-    JListOperator movieList = new JListOperator(mainWindow);
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
     JComboBoxOperator categoryField = new JComboBoxOperator(mainWindow,
-        Category.UNCATEGORIZED.toString());
+        new NameComponentChooser("category"));
 
     movieList.clickOnItem(0, 1);
     assertThat(categoryField.getSelectedItem()).isEqualTo(Category.SCIFI);
@@ -171,7 +171,8 @@ class TestSwingMovieListEditorView {
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
     JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
-    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow, new NameComponentChooser("rating"));
+    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow,
+        new NameComponentChooser("rating"));
     movieList.clickOnItem(0, 1);
     ratingCombo.setSelectedIndex(4);
     JButtonOperator updateButton = new JButtonOperator(mainWindow, "update");
@@ -200,7 +201,7 @@ class TestSwingMovieListEditorView {
     assertThat(categoryCombo.getSelectedItem()).isEqualTo(Category.HORROR);
   }
 
-  @Disabled("somehow doesnt find the text although it's there")
+  @Disabled("somehow doesnt find the text in dialog although it's there")
   @Test
   void duplicate_caused_by_add() {
     mainWindow = new JFrameOperator("Movie List");
