@@ -1,5 +1,6 @@
 package com.larseckart.movietracker;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -104,14 +105,10 @@ public class TestLogicalLayer {
   }
 
   @Test
-  void updating() {
-    Vector<Movie> newMovies = new Vector<>();
-    newMovies.add(starWars);
-    newMovies.add(new Movie("Star Trek I", 5));
-    newMovies.add(starGate);
-
+  void updating() throws UnratedException {
     given(mockView.getNameField()).willReturn("Star Trek I");
     given(mockView.getRatingField()).willReturn(6);
+    given(mockView.getCategoryField()).willReturn(Category.COMEDY);
 
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
     editor.select(1);
@@ -119,11 +116,17 @@ public class TestLogicalLayer {
 
     verify(mockView).setNameField("Star Trek");
     verify(mockView).setRatingField(4);
+    verify(mockView).setCategoryField(Category.SCIFI);
+
     verify(mockView).getNameField();
     verify(mockView).getRatingField();
-    // mockito doesnt understand the difference in list contents, we call it once with movies and once with newMovies
-    // but for mockito it's the same call (since objects are the same, but changed values)
-    //verify(mockView).setMovies(newMovies);
+    verify(mockView).getCategoryField();
+    // mockito doesnt understand the difference in list contents, we call it once with movies and
+    // once with updated Movies but for mockito it's the same call (since objects are the same,
+    // but changed values)
+    verify(mockView, times(2)).setMovies(movies);
+    assertThat(starTrek.getRating()).isEqualTo(5);
+    assertThat(starTrek.getCategory()).isEqualTo(Category.COMEDY);
   }
 
   @Test

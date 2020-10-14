@@ -62,6 +62,7 @@ public class MovieListEditor {
 
   private void updateMovieRating() {
     selectedMovie.setRating(aView.getRatingField() - 1);
+    selectedMovie.setCategory(aView.getCategoryField());
   }
 
   private void updateMovieList() {
