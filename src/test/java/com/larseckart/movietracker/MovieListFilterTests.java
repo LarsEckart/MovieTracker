@@ -16,9 +16,9 @@ class MovieListFilterTests {
   private MovieList kidsList;
 
   @Test
-  void returns_sublist() throws Exception {
+  void subsets() throws Exception {
     starWars = new Movie("Star Wars", Category.SCIFI, 5);
-    legoMovie = new Movie("Lego Movie", Category.SCIFI, 5);
+    legoMovie = new Movie("Lego Movie", Category.Kids, 5);
     starTrek = new Movie("Star Trek", Category.SCIFI, 3);
     starGate = new Movie("Stargate", Category.SCIFI);
     theShining = new Movie("The Shining", Category.HORROR, 2);

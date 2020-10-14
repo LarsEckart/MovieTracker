@@ -3,6 +3,7 @@ package com.larseckart.movietracker;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class MovieList {
 
@@ -41,6 +42,32 @@ public class MovieList {
   }
 
   public Object categorySublist(Category category) {
-    return null;
+    MovieList filtered = new MovieList();
+    movies.stream()
+        .filter(m -> category.equals(m.getCategory()))
+        .forEach(filtered::add);
+    return filtered;
+  }
+
+  @Override
+  public String toString() {
+    return movies.toString();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    MovieList movieList = (MovieList) o;
+    return Objects.equals(movies, movieList.movies);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(movies);
   }
 }
