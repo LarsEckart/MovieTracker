@@ -48,6 +48,7 @@ public class MovieListEditor {
       String newName = aView.getNameField();
       if (selectedMovie.getName().equals(newName)) {
         updateMovieRating();
+        updateMovieList();
       } else {
         try {
           movies.rename(selectedMovie, newName);
