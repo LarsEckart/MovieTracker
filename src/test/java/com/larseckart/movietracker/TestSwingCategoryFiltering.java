@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.netbeans.jemmy.operators.JComboBoxOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JListOperator;
+import org.netbeans.jemmy.util.NameComponentChooser;
 
 class TestSwingCategoryFiltering {
 
@@ -92,8 +93,8 @@ class TestSwingCategoryFiltering {
     MovieListEditor editor =
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
-    JListOperator movieList = new JListOperator(mainWindow);
-    JComboBoxOperator categoryCombo = new JComboBoxOperator(mainWindow, Category.ALL.toString());
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
+    JComboBoxOperator categoryCombo = new JComboBoxOperator(mainWindow, new NameComponentChooser("categoryFilter"));
     categoryCombo.setSelectedItem(Category.FANTASY);
     ListModel fantasyList = movieList.getModel();
     assertThat(fantasyList.getSize()).isEqualTo(fantasyMovies.size());

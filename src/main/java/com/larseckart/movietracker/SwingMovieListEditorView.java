@@ -93,20 +93,6 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     setSize(300, 400);
   }
 
-  private void initCategoryFilterField() {
-    categoryFilterField = new JComboBox<>(Category.categories());
-    categoryFilterField.setSelectedItem(Category.ALL);
-    categoryFilterField.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        JComboBox<Category> source = (JComboBox<Category>) e.getSource();
-        myEditor.filterOnCategory((Category) source.getSelectedItem());
-
-      }
-    });
-    getContentPane().add(categoryFilterField);
-  }
-
   private void setTitle() {
     setTitle("Movie List");
   }
@@ -117,6 +103,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
 
   private void initList() {
     movieList = new JList<>(new Vector<>());
+    movieList.setName("movieList");
     movieList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     movieList.setCellRenderer(new CustomMovieListRenderer());
     movieList.addListSelectionListener(new ListSelectionListener() {
@@ -133,15 +120,31 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     getContentPane().add(scroller);
   }
 
+  private void initCategoryFilterField() {
+    categoryFilterField = new JComboBox<>(Category.categories());
+    categoryFilterField.setName("categoryFilter");
+    categoryFilterField.setSelectedItem(Category.ALL);
+    categoryFilterField.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        JComboBox<Category> source = (JComboBox<Category>) e.getSource();
+        myEditor.filterOnCategory((Category) source.getSelectedItem());
+
+      }
+    });
+    getContentPane().add(categoryFilterField);
+  }
+
   private void initNameField() {
     movieField = new JTextField(16);
+    movieField.setName("name");
     getContentPane().add(movieField);
   }
 
   private void initCategoryField() {
     categoryField = new JComboBox<>(Category.categories());
-    categoryField.setSelectedItem(Category.UNCATEGORIZED);
     categoryField.setName("category");
+    categoryField.setSelectedItem(Category.UNCATEGORIZED);
     getContentPane().add(categoryField);
   }
 
@@ -153,6 +156,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
 
   private void initAddButton() {
     JButton addButton = new JButton("Add");
+    addButton.setName("add");
     getContentPane().add(addButton);
     addButton.addActionListener(new ActionListener() {
 
@@ -165,6 +169,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
 
   private void initUpdateButton() {
     JButton updateButton = new JButton("Update");
+    updateButton.setName("update");
     getContentPane().add(updateButton);
     updateButton.addActionListener(new ActionListener() {
 

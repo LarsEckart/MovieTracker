@@ -124,7 +124,7 @@ public class TestLogicalLayer {
     // mockito doesnt understand the difference in list contents, we call it once with movies and
     // once with updated Movies but for mockito it's the same call (since objects are the same,
     // but changed values)
-    verify(mockView, times(2)).setMovies(movies);
+    verify(mockView, times(3)).setMovies(movies);
     assertThat(starTrek.getRating()).isEqualTo(5);
     assertThat(starTrek.getCategory()).isEqualTo(Category.COMEDY);
   }

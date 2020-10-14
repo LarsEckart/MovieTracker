@@ -170,11 +170,11 @@ class TestSwingMovieListEditorView {
     MovieListEditor editor =
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
-    JListOperator movieList = new JListOperator(mainWindow);
-    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow);
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
+    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow, new NameComponentChooser("rating"));
     movieList.clickOnItem(0, 1);
     ratingCombo.setSelectedIndex(4);
-    JButtonOperator updateButton = new JButtonOperator(mainWindow, "Update");
+    JButtonOperator updateButton = new JButtonOperator(mainWindow, "update");
     updateButton.pushNoBlock();
     movieList.clickOnItem(1, 1);
     movieList.clickOnItem(0, 1);
