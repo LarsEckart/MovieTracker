@@ -83,6 +83,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     initAddButton();
     initUpdateButton();
     pack();
+    setSize(300, 400);
   }
 
   private void setTitle() {
