@@ -9,6 +9,7 @@ public class MovieListEditor {
 
   private MovieList filteredMovies;
   private Movie selectedMovie;
+  private Category filterCategory = Category.ALL;
 
   public MovieListEditor(MovieList movieList, MovieListEditorView aView) {
     this.movies = movieList;
@@ -67,6 +68,7 @@ public class MovieListEditor {
   private void updateMovieRating() {
     selectedMovie.setRating(aView.getRatingField() - 1);
     selectedMovie.setCategory(aView.getCategoryField());
+    filterOnCategory(filterCategory);
   }
 
   private void updateMovieList() {
@@ -74,6 +76,7 @@ public class MovieListEditor {
   }
 
   public void filterOnCategory(Category category) {
+    filterCategory = category;
     filteredMovies = movies.categorySublist(category);
     updateMovieList();
   }

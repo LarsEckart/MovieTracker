@@ -39,17 +39,13 @@ class TestSwingMovieListEditorView {
     starGate = new Movie("Stargate", Category.SCIFI);
     theShining = new Movie("The Shining", Category.HORROR, 2);
 
-    movies = new Vector<>();
-    movies.add(starWars);
-    movies.add(starTrek);
-    movies.add(starGate);
-    movies.add(theShining);
-
     movieList = new MovieList();
     movieList.add(starWars);
     movieList.add(starTrek);
     movieList.add(starGate);
     movieList.add(theShining);
+
+    movies = new Vector<>(movieList.getMovies());
   }
 
   @Test

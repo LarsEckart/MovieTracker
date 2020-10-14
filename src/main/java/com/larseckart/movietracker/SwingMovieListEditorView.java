@@ -24,6 +24,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   private JTextField movieField;
   private JComboBox<ImageIcon> ratingField;
   private JComboBox<Category> categoryField;
+  private JComboBox<Category> categoryFilterField;
 
   public SwingMovieListEditorView() {
     super();
@@ -82,13 +83,28 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     setTitle();
     setLayout();
     initList();
+    initCategoryFilterField();
     initNameField();
     initCategoryField();
-    initRatingBox();
+    initRatingCombo();
     initAddButton();
     initUpdateButton();
     pack();
     setSize(300, 400);
+  }
+
+  private void initCategoryFilterField() {
+    categoryFilterField = new JComboBox<>(Category.categories());
+    categoryFilterField.setSelectedItem(Category.ALL);
+    categoryFilterField.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        JComboBox<Category> source = (JComboBox<Category>) e.getSource();
+        myEditor.filterOnCategory((Category) source.getSelectedItem());
+
+      }
+    });
+    getContentPane().add(categoryFilterField);
   }
 
   private void setTitle() {
@@ -129,7 +145,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     getContentPane().add(categoryField);
   }
 
-  private void initRatingBox() {
+  private void initRatingCombo() {
     ratingField = new JComboBox<>(CustomMovieListRenderer.icons());
     ratingField.setName("rating");
     getContentPane().add(ratingField);
