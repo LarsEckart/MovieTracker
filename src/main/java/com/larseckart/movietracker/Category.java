@@ -1,6 +1,10 @@
 package com.larseckart.movietracker;
 
+import java.util.Vector;
+
 public class Category {
+
+  private static final Vector<Category> allCategories = new Vector<>();
 
   public static final Category UNCATEGORIZED = new Category("Uncategorized");
   public static final Category SCIFI = new Category("Science Fiction");
@@ -14,6 +18,11 @@ public class Category {
 
   private Category(String name) {
     this.name = name;
+    allCategories.add(this);
+  }
+
+  public static Vector<Category> categories() {
+    return allCategories;
   }
 
   @Override
