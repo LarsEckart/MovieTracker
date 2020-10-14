@@ -7,12 +7,12 @@ public class MovieListEditor {
   private final MovieListEditorView aView;
   private final MovieList movies;
 
-  private MovieList filtered;
+  private MovieList filteredMovies;
   private Movie selectedMovie;
 
   public MovieListEditor(MovieList movieList, MovieListEditorView aView) {
     this.movies = movieList;
-    this.filtered = movies;
+    this.filteredMovies = movies;
     this.aView = aView;
     aView.setMovies(new Vector<>(movieList.getMovies()));
     aView.setEditor(this);
@@ -34,7 +34,7 @@ public class MovieListEditor {
     if (index == -1) {
       selectedMovie = null;
     } else {
-      selectedMovie = movies.getMovie(index);
+      selectedMovie = filteredMovies.getMovie(index);
       aView.setNameField(selectedMovie.getName());
       aView.setCategoryField(selectedMovie.getCategory());
 
@@ -70,11 +70,11 @@ public class MovieListEditor {
   }
 
   private void updateMovieList() {
-    aView.setMovies(new Vector<>(filtered.getMovies()));
+    aView.setMovies(new Vector<>(filteredMovies.getMovies()));
   }
 
   public void filterOnCategory(Category category) {
-    filtered = movies.categorySublist(category);
+    filteredMovies = movies.categorySublist(category);
     updateMovieList();
   }
 }
