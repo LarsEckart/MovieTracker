@@ -1,5 +1,6 @@
 package com.larseckart.movietracker;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.util.Arrays;
 import java.util.Vector;
@@ -15,8 +16,8 @@ class CustomMovieListRenderer extends JLabel implements ListCellRenderer<Movie> 
       boolean isSelected, boolean cellHasFocus) {
 
     if (isSelected) {
-      setBackground(list.getSelectionBackground());
-      setForeground(list.getSelectionForeground());
+      setBackground(Color.BLACK);
+      //setForeground(Color.WHITE);
     } else {
       setBackground(list.getBackground());
       setForeground(list.getForeground());

@@ -96,9 +96,9 @@ class TestSwingCategoryFiltering {
     JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
     JComboBoxOperator categoryCombo = new JComboBoxOperator(mainWindow, new NameComponentChooser("categoryFilter"));
     categoryCombo.setSelectedItem(Category.FANTASY);
+
     ListModel fantasyList = movieList.getModel();
     assertThat(fantasyList.getSize()).isEqualTo(fantasyMovies.size());
-
   }
 
 

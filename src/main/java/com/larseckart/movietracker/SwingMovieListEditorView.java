@@ -93,7 +93,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     getContentPane().add(initButtonPanel());
 
     pack();
-    setSize(300, 400);
+    setSize(300, 500);
   }
 
   private JPanel initButtonPanel() {
