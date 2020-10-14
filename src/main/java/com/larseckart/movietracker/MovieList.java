@@ -39,4 +39,8 @@ public class MovieList {
     }
     movie.rename(newName);
   }
+
+  public Object categorySublist(Category category) {
+    return null;
+  }
 }

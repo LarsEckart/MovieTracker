@@ -125,11 +125,13 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   private void initCategoryField() {
     categoryField = new JComboBox<>(Category.categories());
     categoryField.setSelectedItem(Category.UNCATEGORIZED);
+    categoryField.setName("category");
     getContentPane().add(categoryField);
   }
 
   private void initRatingBox() {
     ratingField = new JComboBox<>(CustomMovieListRenderer.icons());
+    ratingField.setName("rating");
     getContentPane().add(ratingField);
   }
 

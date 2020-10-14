@@ -15,6 +15,7 @@ import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JLabelOperator;
 import org.netbeans.jemmy.operators.JListOperator;
 import org.netbeans.jemmy.operators.JTextFieldOperator;
+import org.netbeans.jemmy.util.NameComponentChooser;
 
 /**
  * I couldn't get it to work on travis linux machine.
@@ -130,7 +131,8 @@ class TestSwingMovieListEditorView {
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
     JListOperator movieList = new JListOperator(mainWindow);
-    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow);
+    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow,
+        new NameComponentChooser("rating"));
     movieList.clickOnItem(0, 1);
     assertThat(ratingCombo.getSelectedIndex()).isEqualTo(6);
   }
@@ -142,7 +144,7 @@ class TestSwingMovieListEditorView {
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
     JListOperator movieList = new JListOperator(mainWindow);
-    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow);
+    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow, new NameComponentChooser("rating"));
     movieList.clickOnItem(0, 1);
     assertThat(ratingCombo.getSelectedIndex()).isEqualTo(6);
   }

@@ -13,6 +13,7 @@ public class Category {
   public static final Category DRAMA = new Category("Drama");
   public static final Category Kids = new Category("Kids");
   public static final Category THRILLER = new Category("Thriller");
+  public static final Category FANTASY = new Category("Fantasy");
 
   private String name;
 
