@@ -42,6 +42,10 @@ public class MovieList {
   }
 
   public Object categorySublist(Category category) {
+    if (category.equals(Category.ALL)) {
+      return this;
+    }
+
     MovieList filtered = new MovieList();
     movies.stream()
         .filter(m -> category.equals(m.getCategory()))
