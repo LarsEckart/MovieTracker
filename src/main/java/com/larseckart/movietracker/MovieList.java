@@ -41,7 +41,7 @@ public class MovieList {
     movie.rename(newName);
   }
 
-  public Object categorySublist(Category category) {
+  public MovieList categorySublist(Category category) {
     if (category.equals(Category.ALL)) {
       return this;
     }

@@ -4,13 +4,15 @@ import java.util.Vector;
 
 public class MovieListEditor {
 
-  private final MovieList movies;
   private final MovieListEditorView aView;
+  private final MovieList movies;
 
+  private MovieList filtered;
   private Movie selectedMovie;
 
   public MovieListEditor(MovieList movieList, MovieListEditorView aView) {
     this.movies = movieList;
+    this.filtered = movies;
     this.aView = aView;
     aView.setMovies(new Vector<>(movieList.getMovies()));
     aView.setEditor(this);
@@ -68,6 +70,11 @@ public class MovieListEditor {
   }
 
   private void updateMovieList() {
-    aView.setMovies(new Vector<>(movies.getMovies()));
+    aView.setMovies(new Vector<>(filtered.getMovies()));
+  }
+
+  public void filterOnCategory(Category category) {
+    filtered = movies.categorySublist(category);
+    updateMovieList();
   }
 }
