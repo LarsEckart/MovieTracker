@@ -1,15 +1,21 @@
 package com.larseckart.movietracker;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -82,15 +88,44 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   public void init() {
     setTitle();
     setLayout();
-    initList();
-    initCategoryFilterField();
-    initNameField();
-    initCategoryField();
-    initRatingCombo();
-    initAddButton();
-    initUpdateButton();
+    getContentPane().add(initListPanel());
+    getContentPane().add(initDetailPanel());
+    getContentPane().add(initButtonPanel());
+
     pack();
     setSize(300, 400);
+  }
+
+  private JPanel initButtonPanel() {
+    JPanel buttonPanel = new JPanel();
+    buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+    buttonPanel.setBorder(BorderFactory.createEmptyBorder(1, 10, 10, 10));
+    buttonPanel.add(initAddButton());
+    buttonPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+    buttonPanel.add(initUpdateButton());
+    return buttonPanel;
+  }
+
+  private JPanel initDetailPanel() {
+    JPanel detailPanel = new JPanel();
+    detailPanel.setLayout(new BoxLayout(detailPanel, BoxLayout.Y_AXIS));
+    detailPanel.setBorder(BorderFactory.createEmptyBorder(1, 10, 10, 10));
+    detailPanel.add(initNameField());
+    detailPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+    detailPanel.add(initRatingCombo());
+    detailPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+    detailPanel.add(initCategoryField());
+    return detailPanel;
+  }
+
+  private JPanel initListPanel() {
+    JPanel listPane = new JPanel();
+    listPane.setLayout(new BoxLayout(listPane, BoxLayout.Y_AXIS));
+    listPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    listPane.add(initCategoryFilterField());
+    listPane.add(Box.createRigidArea(new Dimension(0, 5)));
+    listPane.add(initList());
+    return listPane;
   }
 
   private void setTitle() {
@@ -101,7 +136,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     getContentPane().setLayout(new FlowLayout());
   }
 
-  private void initList() {
+  private JScrollPane initList() {
     movieList = new JList<>(new Vector<>());
     movieList.setName("movieList");
     movieList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -117,10 +152,10 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
             movieList,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    getContentPane().add(scroller);
+    return scroller;
   }
 
-  private void initCategoryFilterField() {
+  private Component initCategoryFilterField() {
     categoryFilterField = new JComboBox<>(Category.categories());
     categoryFilterField.setName("categoryFilter");
     categoryFilterField.setSelectedItem(Category.ALL);
@@ -132,32 +167,31 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
 
       }
     });
-    getContentPane().add(categoryFilterField);
+    return categoryFilterField;
   }
 
-  private void initNameField() {
+  private Component initNameField() {
     movieField = new JTextField(16);
     movieField.setName("name");
-    getContentPane().add(movieField);
+    return movieField;
   }
 
-  private void initCategoryField() {
+  private Component initCategoryField() {
     categoryField = new JComboBox<>(Category.categories());
     categoryField.setName("category");
     categoryField.setSelectedItem(Category.UNCATEGORIZED);
-    getContentPane().add(categoryField);
+    return categoryField;
   }
 
-  private void initRatingCombo() {
+  private Component initRatingCombo() {
     ratingField = new JComboBox<>(CustomMovieListRenderer.icons());
     ratingField.setName("rating");
-    getContentPane().add(ratingField);
+    return ratingField;
   }
 
-  private void initAddButton() {
+  private Component initAddButton() {
     JButton addButton = new JButton("Add");
     addButton.setName("add");
-    getContentPane().add(addButton);
     addButton.addActionListener(new ActionListener() {
 
       @Override
@@ -165,12 +199,12 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
         myEditor.add();
       }
     });
+    return addButton;
   }
 
-  private void initUpdateButton() {
+  private Component initUpdateButton() {
     JButton updateButton = new JButton("Update");
     updateButton.setName("update");
-    getContentPane().add(updateButton);
     updateButton.addActionListener(new ActionListener() {
 
       @Override
@@ -178,6 +212,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
         myEditor.update();
       }
     });
+    return updateButton;
   }
 
   public static SwingMovieListEditorView start() {
