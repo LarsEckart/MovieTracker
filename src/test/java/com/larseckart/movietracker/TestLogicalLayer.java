@@ -10,7 +10,7 @@ import java.util.Vector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class TestGui {
+public class TestLogicalLayer {
 
   private MovieListEditorView mockView;
   private Vector<Movie> movies;
