@@ -24,15 +24,15 @@ class XMLMovieListWriter implements MovieListWriter {
       destination.write("\">");
       destination.write("\n    <ratings>");
       Iterator<Rating> ratings = movie.ratings();
-      if (ratings.hasNext()) {
+      while (ratings.hasNext()) {
         destination.write("\n      <rating value=\"");
         Rating next = ratings.next();
         destination.write(Integer.toString(next.value()));
         destination.write("\" source=\"");
         destination.write(next.source());
         destination.write("\" />");
-        destination.write("\n    </ratings>");
       }
+      destination.write("\n    </ratings>");
       destination.write("\n  </movie>");
     }
     destination.write("\n</movielist>");
