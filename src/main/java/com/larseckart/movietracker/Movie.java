@@ -84,6 +84,11 @@ public class Movie {
     return this.name;
   }
 
+  public void addRating(int aRating, String source) {
+    rating += aRating;
+    ratings.add(new Rating(aRating, source));
+  }
+
   public void addRating(int aRating) {
     rating += aRating;
     ratings.add(new Rating(aRating));
@@ -105,6 +110,10 @@ public class Movie {
 
   public boolean hasRating() {
     return !ratings.isEmpty();
+  }
+
+  public Iterator<Rating> ratings() {
+    return ratings.iterator();
   }
 
   @Override
@@ -149,8 +158,7 @@ public class Movie {
     this.category = category;
   }
 
-  void
-  writeMovie(Writer destination) throws IOException {
+  void writeMovie(Writer destination) throws IOException {
     destination.write(getName());
     writeSeparator(destination);
     destination.write(getCategory().toString());
@@ -163,9 +171,5 @@ public class Movie {
 
   private void writeSeparator(Writer destination) throws IOException {
     destination.write(DELIMITER);
-  }
-
-  public Iterator<Rating> ratings() {
-    return ratings.iterator();
   }
 }

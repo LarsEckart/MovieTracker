@@ -18,4 +18,16 @@ class TestRating {
     assertThat(theRating.value()).isEqualTo(5);
     assertThat(theRating.source()).isEqualTo("Anonymous");
   }
+
+  @Test
+  void rating_with_source() throws Exception {
+    Movie starWars = new Movie("Star Wars", Category.SCIFI);
+    starWars.addRating(5, "New York Times");
+
+    Iterator<Rating> ratings = starWars.ratings();
+    assertThat(ratings.hasNext()).isTrue();
+    Rating theRating = ratings.next();
+    assertThat(theRating.value()).isEqualTo(5);
+    assertThat(theRating.source()).isEqualTo("New York Times");
+  }
 }
