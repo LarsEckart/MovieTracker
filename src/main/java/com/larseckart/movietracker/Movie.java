@@ -52,7 +52,7 @@ public class Movie {
     this(name, category, rating);
     ratings = new ArrayList<>();
     for (int i = 0; i < count; i++) {
-      ratings.add(new Rating(rating));
+      ratings.add(new Rating(rating/count));
     }
   }
 
@@ -105,7 +105,7 @@ public class Movie {
 
   public int getRating() throws UnratedException {
     if (hasRating()) {
-      return rating / ratings.size();
+      return ratings.stream().mapToInt(Rating::value).sum() / ratings.size();
     } else {
       throw new UnratedException();
     }
