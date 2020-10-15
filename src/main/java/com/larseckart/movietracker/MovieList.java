@@ -70,6 +70,10 @@ public class MovieList {
     return filtered;
   }
 
+  public void writeTo(Writer destination) throws IOException {
+    new PlainTextMovieListWriter(destination).write(this);
+  }
+
   @Override
   public String toString() {
     return movies.toString();
@@ -90,10 +94,6 @@ public class MovieList {
   @Override
   public int hashCode() {
     return Objects.hash(movies);
-  }
-
-  public void writeTo(Writer destination) throws IOException {
-    new PlainTextMovieListWriter(destination).write(this);
   }
 
 }
