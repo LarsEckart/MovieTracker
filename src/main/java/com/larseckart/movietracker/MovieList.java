@@ -82,8 +82,9 @@ public class MovieList {
       return;
     }
 
-    Movie movieToWrite = movies.get(0);
-    movieToWrite.writeMovie(destination);
+    for (Movie movie : movies) {
+      movie.writeMovie(destination);
+    }
     destination.flush();
   }
 

@@ -118,14 +118,18 @@ public class Movie {
   void
   writeMovie(Writer destination) throws IOException {
     destination.write(getName());
-    destination.write("|");
+    writeSeparator(destination);
     destination.write(getCategory().toString());
-    destination.write("|");
+    writeSeparator(destination);
     try {
       destination.write(Integer.toString(getRating()));
     } catch (UnratedException e) {
       destination.write("-1");
     }
     destination.write("\n");
+  }
+
+  private void writeSeparator(Writer destination) throws IOException {
+    destination.write("|");
   }
 }
