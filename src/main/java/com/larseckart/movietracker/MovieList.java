@@ -1,5 +1,7 @@
 package com.larseckart.movietracker;
 
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -73,5 +75,9 @@ public class MovieList {
   @Override
   public int hashCode() {
     return Objects.hash(movies);
+  }
+
+  public void writeTo(Writer destination) {
+
   }
 }
