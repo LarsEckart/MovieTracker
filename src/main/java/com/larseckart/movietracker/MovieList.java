@@ -93,14 +93,7 @@ public class MovieList {
   }
 
   public void writeTo(Writer destination) throws IOException {
-    if (movies.isEmpty()) {
-      return;
-    }
-
-    for (Movie movie : movies) {
-      movie.writeMovie(destination);
-    }
-    destination.flush();
+    new PlainTextMovieListWriter(destination).write(this);
   }
 
 }
