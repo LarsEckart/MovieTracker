@@ -14,7 +14,6 @@ public class Movie {
   public static final String DELIMITER = "|";
   private Category category;
   private String name;
-  private int rating;
   private List<Rating> ratings;
 
   public Movie(String name) {
@@ -27,7 +26,6 @@ public class Movie {
 
   public Movie(Movie original) {
     this.name = original.name;
-    this.rating = original.rating;
     this.category = original.category;
     this.ratings = new ArrayList<>(original.ratings);
   }
@@ -43,7 +41,6 @@ public class Movie {
     this.category = (category != null) ? category : Category.UNCATEGORIZED;
     ratings = new ArrayList<>();
     if (rating >= 0) {
-      this.rating = rating;
       ratings.add(new Rating(rating));
     }
   }
@@ -93,12 +90,10 @@ public class Movie {
   }
 
   private void primAddRating(Rating rating) {
-    this.rating += rating.value();
     ratings.add(rating);
   }
 
   public void setRating(int rating) {
-    this.rating = rating;
     this.ratings = new ArrayList<>();
     this.ratings.add(new Rating(rating));
   }
@@ -166,7 +161,7 @@ public class Movie {
     writeSeparator(destination);
     destination.write(getCategory().toString());
     writeSeparator(destination);
-    destination.write(Integer.toString(rating));
+    destination.write(Integer.toString(ratings.stream().mapToInt(Rating::value).sum()));
     writeSeparator(destination);
     destination.write(Integer.toString(ratings.size()));
     destination.write("\n");
