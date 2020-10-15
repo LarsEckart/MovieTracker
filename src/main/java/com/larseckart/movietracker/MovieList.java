@@ -1,6 +1,7 @@
 package com.larseckart.movietracker;
 
 import java.io.IOException;
+import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +11,10 @@ import java.util.Objects;
 public class MovieList {
 
   private final List<Movie> movies = new ArrayList<>();
+
+  public static MovieList readFrom(Reader reader) {
+    return new MovieList();
+  }
 
   public int size() {
     return movies.size();
