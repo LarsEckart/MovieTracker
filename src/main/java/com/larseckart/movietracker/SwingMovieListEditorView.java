@@ -118,7 +118,14 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
     menuBar.add(fileMenu);
+    fileMenu.add(initSaveAsItem());
+    fileMenu.add(initSaveItem());
+    return menuBar;
+  }
+
+  private JMenuItem initSaveAsItem() {
     JMenuItem saveAsItem = new JMenuItem("Save As...");
+    saveAsItem.setName("saveas");
     saveAsItem.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -129,8 +136,23 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
         }
       }
     });
-    fileMenu.add(saveAsItem);
-    return menuBar;
+    return saveAsItem;
+  }
+
+  private JMenuItem initSaveItem() {
+    JMenuItem saveItem = new JMenuItem("Save...");
+    saveItem.setName("save");
+    saveItem.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        try {
+          myEditor.save();
+        } catch (IOException ioException) {
+          //TODO: deal with this
+        }
+      }
+    });
+    return saveItem;
   }
 
   private JPanel initButtonPanel() {

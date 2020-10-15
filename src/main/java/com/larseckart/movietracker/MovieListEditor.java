@@ -97,12 +97,6 @@ public class MovieListEditor {
 
   public boolean saveAs() throws IOException {
     outputFile = aView.getFile("*.dat");
-    if (outputFile == null) {
-      return false;
-    }
-    try (FileWriter writer = new FileWriter(outputFile, StandardCharsets.UTF_8)) {
-      movies.writeTo(writer);
-      return true;
-    }
+    return save();
   }
 }
