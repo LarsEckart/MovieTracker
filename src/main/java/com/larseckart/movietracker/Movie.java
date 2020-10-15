@@ -31,7 +31,7 @@ public class Movie {
     this.rating = original.rating;
     this.numberOfRatings = original.numberOfRatings;
     this.category = original.category;
-    this.ratings = new ArrayList<>(original.rating);
+    this.ratings = new ArrayList<>(original.ratings);
   }
 
   public Movie(String name, Category category) {
