@@ -9,11 +9,20 @@ import org.junit.jupiter.api.Test;
 class TestMovieListReading {
 
   private String emptyString = "";
+
   @Test
-  void name() throws Exception {
+  void read_empty_string() throws Exception {
     try (Reader reader = new StringReader(emptyString)) {
       MovieList movieList = MovieList.readFrom(reader);
       assertThat(movieList.size()).isEqualTo(0);
+    }
+  }
+
+  @Test
+  void read_one_movie() throws Exception {
+    try (Reader reader = new StringReader("Finding Nemo|Kids|5")) {
+      MovieList movieList = MovieList.readFrom(reader);
+      assertThat(movieList.size()).isEqualTo(1);
     }
   }
 }

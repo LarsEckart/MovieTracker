@@ -1,5 +1,6 @@
 package com.larseckart.movietracker;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -12,8 +13,14 @@ public class MovieList {
 
   private final List<Movie> movies = new ArrayList<>();
 
-  public static MovieList readFrom(Reader reader) {
-    return new MovieList();
+  public static MovieList readFrom(Reader reader) throws IOException {
+    BufferedReader bufferedReader = new BufferedReader(reader);
+    MovieList movieList = new MovieList();
+    Movie movie = Movie.readFrom(bufferedReader);
+    if (movie != null) {
+      movieList.add(movie);
+    }
+    return movieList;
   }
 
   public int size() {

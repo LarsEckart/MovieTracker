@@ -1,8 +1,11 @@
 package com.larseckart.movietracker;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.io.Writer;
 import java.util.Objects;
+import java.util.StringTokenizer;
 
 public class Movie {
 
@@ -36,6 +39,23 @@ public class Movie {
     this.name = name;
     this.category = (category != null) ? category : Category.UNCATEGORIZED;
     this.rating = rating;
+  }
+
+  public static Movie readFrom(BufferedReader reader) throws IOException {
+    String oneLine = reader.readLine();
+    if (oneLine == null) {
+      return null;
+    }
+
+    StringTokenizer tokenizer = new StringTokenizer(oneLine, "|");
+    try{
+      String name = tokenizer.nextToken();
+      Category category = Category.getCategoryNamed(tokenizer.nextToken());
+      int rating = Integer.parseInt(tokenizer.nextToken());
+      return new Movie(name, category, rating);
+    } catch (NumberFormatException e) {
+      throw new IOException("Badly formatted movie collection");
+    }
   }
 
   private void checkEmpty(String name) {

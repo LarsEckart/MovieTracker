@@ -1,10 +1,13 @@
 package com.larseckart.movietracker;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 public class Category {
 
   private static final Vector<Category> allCategories = new Vector<>();
+  private static final Map<String, Category> categoriesByName = new HashMap<>();
 
   public static final Category UNCATEGORIZED = new Category("Uncategorized");
   public static final Category SCIFI = new Category("Science Fiction");
@@ -21,10 +24,15 @@ public class Category {
   private Category(String name) {
     this.name = name;
     allCategories.add(this);
+    categoriesByName.put(name, this);
   }
 
   public static Vector<Category> categories() {
     return allCategories;
+  }
+
+  public static Category getCategoryNamed(String name) {
+    return categoriesByName.getOrDefault(name, UNCATEGORIZED);
   }
 
   @Override
