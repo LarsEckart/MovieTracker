@@ -1,0 +1,9 @@
+<movielist>
+  <movie name="Star Wars" category="Science Fiction">
+    <ratings>
+      <rating value="4" source="New York Times" />
+      <rating value="3" source="Washington Post" />
+      <rating value="3" source="The Independent" />
+    </ratings>
+  </movie>
+</movielist>

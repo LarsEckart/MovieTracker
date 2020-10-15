@@ -57,7 +57,10 @@ class TestXmlMovieListWriter {
 
     writer.write(movieList);
 
-    assertThat(destination.toString()).isEqualTo("""
+    String actual = destination.toString();
+
+    Approvals.verify(actual);
+    assertThat(actual).isEqualTo("""
         <movielist>
           <movie name="Star Wars" category="Science Fiction">
             <ratings>
@@ -84,9 +87,10 @@ class TestXmlMovieListWriter {
     movieList.add(findingNemo);
 
     writer.write(movieList);
-    String response = destination.toString();
+    String actual = destination.toString();
 
-    assertThat(response).isEqualTo("""
+    Approvals.verify(actual);
+    assertThat(actual).isEqualTo("""
         <movielist>
           <movie name="Star Wars" category="Science Fiction">
             <ratings>
