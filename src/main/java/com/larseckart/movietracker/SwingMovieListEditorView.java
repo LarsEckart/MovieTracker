@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -13,8 +14,12 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -88,18 +93,44 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
 
   @Override
   public File getFile(String name) {
-    return null;
+    JFileChooser fileChooser = new JFileChooser();
+    int returnValue = fileChooser.showSaveDialog(this);
+    if (returnValue == JFileChooser.APPROVE_OPTION) {
+      return fileChooser.getSelectedFile();
+    } else {
+      return null;
+    }
   }
 
   public void init() {
     setTitle();
     setLayout();
+    setJMenuBar(initMenuBar());
     getContentPane().add(initListPanel());
     getContentPane().add(initDetailPanel());
     getContentPane().add(initButtonPanel());
 
     pack();
     setSize(300, 500);
+  }
+
+  private JMenuBar initMenuBar() {
+    JMenuBar menuBar = new JMenuBar();
+    JMenu fileMenu = new JMenu("File");
+    menuBar.add(fileMenu);
+    JMenuItem saveAsItem = new JMenuItem("Save As...");
+    saveAsItem.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        try {
+          myEditor.saveAs();
+        } catch (IOException ioException) {
+          //TODO: deal with this
+        }
+      }
+    });
+    fileMenu.add(saveAsItem);
+    return menuBar;
   }
 
   private JPanel initButtonPanel() {

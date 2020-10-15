@@ -14,6 +14,7 @@ public class MovieListEditor {
   private MovieList filteredMovies;
   private Movie selectedMovie;
   private Category filterCategory = Category.ALL;
+  private File outputFile;
 
   public MovieListEditor(MovieList movieList, MovieListEditorView aView) {
     this.movies = movieList;
@@ -26,8 +27,7 @@ public class MovieListEditor {
   public void add() {
     String newName = aView.getNameField();
     try {
-      Movie newMovie = new Movie(newName);
-      // TODO: rating and category ignored right now. update add related test(s) and make them green
+      Movie newMovie = new Movie(newName, aView.getCategoryField(), aView.getRatingField() - 1);
       movies.add(newMovie);
       updateMovieList();
     } catch (DuplicateMovieException e) {
@@ -85,10 +85,24 @@ public class MovieListEditor {
     updateMovieList();
   }
 
-  public void saveAs() throws IOException {
-    File outputFile = aView.getFile("*.dat");
+  public boolean save() throws IOException {
+    if (outputFile == null) {
+      return false;
+    }
     try (FileWriter writer = new FileWriter(outputFile, StandardCharsets.UTF_8)) {
       movies.writeTo(writer);
+      return true;
+    }
+  }
+
+  public boolean saveAs() throws IOException {
+    outputFile = aView.getFile("*.dat");
+    if (outputFile == null) {
+      return false;
+    }
+    try (FileWriter writer = new FileWriter(outputFile, StandardCharsets.UTF_8)) {
+      movies.writeTo(writer);
+      return true;
     }
   }
 }
