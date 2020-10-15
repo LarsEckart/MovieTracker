@@ -44,6 +44,13 @@ public class Movie {
     }
   }
 
+  public Movie(String name, Category category, int rating, int count) {
+    this.name = name;
+    this.category = category;
+    this.rating = rating;
+    this.numberOfRatings = count;
+  }
+
   public static Movie readFrom(BufferedReader reader) throws IOException {
     String oneLine = reader.readLine();
     if (oneLine == null) {
@@ -55,7 +62,8 @@ public class Movie {
       String name = tokenizer.nextToken();
       Category category = Category.getCategoryNamed(tokenizer.nextToken());
       int rating = Integer.parseInt(tokenizer.nextToken());
-      return new Movie(name, category, rating);
+      int count = Integer.parseInt(tokenizer.nextToken());
+      return new Movie(name, category, rating, count);
     } catch (NumberFormatException e) {
       throw new IOException("Badly formatted movie collection");
     }
@@ -145,11 +153,9 @@ public class Movie {
     writeSeparator(destination);
     destination.write(getCategory().toString());
     writeSeparator(destination);
-    try {
-      destination.write(Integer.toString(getRating()));
-    } catch (UnratedException e) {
-      destination.write("-1");
-    }
+    destination.write(Integer.toString(rating));
+    writeSeparator(destination);
+    destination.write(Integer.toString(numberOfRatings));
     destination.write("\n");
   }
 

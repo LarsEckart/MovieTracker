@@ -20,20 +20,20 @@ class TestMovieListReading {
 
   @Test
   void read_one_movie() throws Exception {
-    try (Reader reader = new StringReader("Finding Nemo|Kids|5")) {
+    try (Reader reader = new StringReader("Finding Nemo|Kids|8|2")) {
       MovieList movieList = MovieList.readFrom(reader);
 
       assertThat(movieList.size()).isEqualTo(1);
       Movie movie = movieList.getMovie(0);
       assertThat(movie.getName()).isEqualTo("Finding Nemo");
       assertThat(movie.getCategory()).isEqualTo(Category.KIDS);
-      assertThat(movie.getRating()).isEqualTo(5);
+      assertThat(movie.getRating()).isEqualTo(4);
     }
   }
 
   @Test
   void read_multiple_movies() throws Exception {
-    try (Reader reader = new StringReader("Finding Nemo|Kids|5\nStar Wars|Science Fiction|3")) {
+    try (Reader reader = new StringReader("Finding Nemo|Kids|5|1\nStar Wars|Science Fiction|9|3")) {
       MovieList movieList = MovieList.readFrom(reader);
 
       assertThat(movieList.size()).isEqualTo(2);
