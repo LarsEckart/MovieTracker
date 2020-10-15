@@ -1,6 +1,7 @@
 package com.larseckart.movietracker;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,7 +10,7 @@ import java.util.Vector;
 public class MovieListEditor {
 
   private final MovieListEditorView aView;
-  private final MovieList movies;
+  private MovieList movies;
 
   private MovieList filteredMovies;
   private Movie selectedMovie;
@@ -98,5 +99,17 @@ public class MovieListEditor {
   public boolean saveAs() throws IOException {
     outputFile = aView.getFile("*.dat");
     return save();
+  }
+
+  public boolean load() throws IOException {
+    File inputFile = aView.getFileToLoad();
+    if (inputFile == null) {
+      return false;
+    }
+
+    FileReader reader = new FileReader(inputFile, StandardCharsets.UTF_8);
+    movies = MovieList.readFrom(reader);
+    filterOnCategory(Category.ALL);
+    return true;
   }
 }

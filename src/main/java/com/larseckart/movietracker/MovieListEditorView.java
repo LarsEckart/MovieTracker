@@ -24,4 +24,6 @@ public interface MovieListEditorView {
   Category getCategoryField();
 
   File getFile(String name);
+
+  File getFileToLoad();
 }

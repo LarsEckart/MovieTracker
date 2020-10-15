@@ -102,6 +102,17 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     }
   }
 
+  @Override
+  public File getFileToLoad() {
+    JFileChooser fileChooser = new JFileChooser();
+    int returnValue = fileChooser.showOpenDialog(this);
+    if (returnValue == JFileChooser.APPROVE_OPTION) {
+      return fileChooser.getSelectedFile();
+    } else {
+      return null;
+    }
+  }
+
   public void init() {
     setTitle();
     setLayout();
@@ -118,9 +129,26 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
     menuBar.add(fileMenu);
+    fileMenu.add(initOpenItem());
     fileMenu.add(initSaveAsItem());
     fileMenu.add(initSaveItem());
     return menuBar;
+  }
+
+  private JMenuItem initOpenItem() {
+    JMenuItem openItem = new JMenuItem("Open");
+    openItem.setName("open");
+    openItem.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        try {
+          myEditor.load();
+        } catch (IOException ioException) {
+          //TODO: deal with this
+        }
+      }
+    });
+    return openItem;
   }
 
   private JMenuItem initSaveAsItem() {
