@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -83,6 +84,11 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   @Override
   public Category getCategoryField() {
     return (Category) categoryField.getSelectedItem();
+  }
+
+  @Override
+  public File getFile(String name) {
+    return null;
   }
 
   public void init() {

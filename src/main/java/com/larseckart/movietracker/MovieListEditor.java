@@ -1,5 +1,9 @@
 package com.larseckart.movietracker;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
 public class MovieListEditor {
@@ -79,5 +83,12 @@ public class MovieListEditor {
     filterCategory = category;
     filteredMovies = movies.categorySublist(category);
     updateMovieList();
+  }
+
+  public void saveAs() throws IOException {
+    File outputFile = aView.getFile("*.dat");
+    try (FileWriter writer = new FileWriter(outputFile, StandardCharsets.UTF_8)) {
+      movies.writeTo(writer);
+    }
   }
 }

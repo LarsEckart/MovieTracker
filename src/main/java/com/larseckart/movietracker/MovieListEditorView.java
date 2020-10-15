@@ -1,5 +1,6 @@
 package com.larseckart.movietracker;
 
+import java.io.File;
 import java.util.Vector;
 
 public interface MovieListEditorView {
@@ -21,4 +22,6 @@ public interface MovieListEditorView {
   void setCategoryField(Category category);
 
   Category getCategoryField();
+
+  File getFile(String name);
 }
