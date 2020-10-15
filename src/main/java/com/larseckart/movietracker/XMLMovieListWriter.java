@@ -23,16 +23,17 @@ class XMLMovieListWriter implements MovieListWriter {
   }
 
   private void writeMovie(MovieList movies) throws IOException {
-    Movie movie = movies.getMovie(0);
-    destination.write("\n  <movie name=\"");
-    destination.write(movie.getName());
-    destination.write("\" category=\"");
-    destination.write(movie.getCategory().toString());
-    destination.write("\">");
-    destination.write("\n    <ratings>");
-    writeRatings(movie);
-    destination.write("\n    </ratings>");
-    destination.write("\n  </movie>");
+    for (Movie movie : movies.getMovies()) {
+      destination.write("\n  <movie name=\"");
+      destination.write(movie.getName());
+      destination.write("\" category=\"");
+      destination.write(movie.getCategory().toString());
+      destination.write("\">");
+      destination.write("\n    <ratings>");
+      writeRatings(movie);
+      destination.write("\n    </ratings>");
+      destination.write("\n  </movie>");
+    }
   }
 
   private void writeRatings(Movie movie) throws IOException {
