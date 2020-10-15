@@ -89,10 +89,8 @@ public class MovieList {
     destination.write("|");
     try {
       destination.write(Integer.toString(movieToWrite.getRating()));
-    } catch (IOException e) {
-      destination.write("-1");
     } catch (UnratedException e) {
-      e.printStackTrace();
+      destination.write("-1");
     }
     destination.write("\n");
     destination.flush();
