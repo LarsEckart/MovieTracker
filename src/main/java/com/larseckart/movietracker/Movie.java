@@ -84,14 +84,17 @@ public class Movie {
     return this.name;
   }
 
-  public void addRating(int aRating, String source) {
-    rating += aRating;
-    ratings.add(new Rating(aRating, source));
+  public void addRating(int aRating) {
+    primAddRating(new Rating(aRating));
   }
 
-  public void addRating(int aRating) {
-    rating += aRating;
-    ratings.add(new Rating(aRating));
+  public void addRating(int aRating, String source) {
+    primAddRating(new Rating(aRating, source));
+  }
+
+  private void primAddRating(Rating rating) {
+    this.rating += rating.value();
+    ratings.add(rating);
   }
 
   public void setRating(int rating) {
