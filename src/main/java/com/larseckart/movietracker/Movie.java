@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 
 public class Movie {
 
+  public static final String DELIMITER = "|";
   private Category category;
   private String name;
   private int totalRating;
@@ -47,7 +48,7 @@ public class Movie {
       return null;
     }
 
-    StringTokenizer tokenizer = new StringTokenizer(oneLine, "|");
+    StringTokenizer tokenizer = new StringTokenizer(oneLine, DELIMITER);
     try{
       String name = tokenizer.nextToken();
       Category category = Category.getCategoryNamed(tokenizer.nextToken());
@@ -150,6 +151,6 @@ public class Movie {
   }
 
   private void writeSeparator(Writer destination) throws IOException {
-    destination.write("|");
+    destination.write(DELIMITER);
   }
 }

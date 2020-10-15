@@ -17,7 +17,7 @@ public class Category {
   public static final Category KIDS = new Category("Kids");
   public static final Category THRILLER = new Category("Thriller");
   public static final Category FANTASY = new Category("Fantasy");
-  public static final Category ALL = new Category("ALL");
+  public static final Category ALL = new Category("All");
 
   private String name;
 
