@@ -54,6 +54,10 @@ public class Movie {
   public Movie(String name, Category category, int rating, int count) {
     this(name, category, rating);
     this.numberOfRatings = count;
+    ratings = new ArrayList<>();
+    for (int i = 0; i < count; i++) {
+      ratings.add(new Rating(rating));
+    }
   }
 
   public static Movie readFrom(BufferedReader reader) throws IOException {
@@ -101,7 +105,7 @@ public class Movie {
 
   public int getRating() throws UnratedException {
     if (hasRating()) {
-      return rating / numberOfRatings;
+      return rating / ratings.size();
     } else {
       throw new UnratedException();
     }
