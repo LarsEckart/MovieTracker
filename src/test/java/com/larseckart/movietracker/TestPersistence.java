@@ -57,7 +57,9 @@ class TestPersistence {
     MovieListEditorView mockView = mock(MovieListEditorView.class);
     given(mockView.getFile("*.dat")).willReturn(outputFile);
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
+
     editor.saveAs();
+
     assertThat(Files.readString(outputFile.toPath())).isEqualTo(
         "Star Wars|Science Fiction|8|2\nFinding Nemo|Kids|5|1\n");
   }

@@ -89,12 +89,7 @@ public class Movie {
   }
 
   public void addRating(int aRating) {
-    if (aRating == -1) {
-      this.rating = aRating;
-    } else {
-      this.rating += aRating;
-    }
-    numberOfRatings++;
+    rating += aRating;
     ratings.add(new Rating(aRating));
   }
 
@@ -112,7 +107,7 @@ public class Movie {
   }
 
   public boolean hasRating() {
-    return numberOfRatings > 0;
+    return !ratings.isEmpty();
   }
 
   @Override
@@ -165,7 +160,7 @@ public class Movie {
     writeSeparator(destination);
     destination.write(Integer.toString(rating));
     writeSeparator(destination);
-    destination.write(Integer.toString(numberOfRatings));
+    destination.write(Integer.toString(ratings.size()));
     destination.write("\n");
   }
 
