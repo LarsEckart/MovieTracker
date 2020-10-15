@@ -2,6 +2,7 @@ package com.larseckart.movietracker;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Iterator;
 
 class XMLMovieListWriter implements MovieListWriter {
 
@@ -13,7 +14,28 @@ class XMLMovieListWriter implements MovieListWriter {
 
   @Override
   public void write(MovieList movies) throws IOException {
-    destination.write("<movielist></movielist>");
+    destination.write("<movielist>");
+    if (movies.size() > 0) {
+      Movie movie = movies.getMovie(0);
+      destination.write("\n  <movie name=\"");
+      destination.write(movie.getName());
+      destination.write("\" category=\"");
+      destination.write(movie.getCategory().toString());
+      destination.write("\">");
+      destination.write("\n    <ratings>");
+      Iterator<Rating> ratings = movie.ratings();
+      if (ratings.hasNext()) {
+        destination.write("\n      <rating value=\"");
+        Rating next = ratings.next();
+        destination.write(Integer.toString(next.value()));
+        destination.write("\" source=\"");
+        destination.write(next.source());
+        destination.write("\" />");
+        destination.write("\n    </ratings>");
+      }
+      destination.write("\n  </movie>");
+    }
+    destination.write("\n</movielist>");
     destination.flush();
   }
 }
