@@ -21,7 +21,7 @@ public class Movie {
   }
 
   public Movie(String name, int rating) {
-    this(name, null, rating);
+    this(name, Category.UNCATEGORIZED, rating);
   }
 
   public Movie(Movie movie) {
