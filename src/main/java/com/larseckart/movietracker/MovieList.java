@@ -1,6 +1,6 @@
 package com.larseckart.movietracker;
 
-import java.io.StringWriter;
+import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -77,7 +77,24 @@ public class MovieList {
     return Objects.hash(movies);
   }
 
-  public void writeTo(Writer destination) {
+  public void writeTo(Writer destination) throws IOException {
+    if (movies.isEmpty()) {
+      return;
+    }
 
+    Movie movieToWrite = movies.get(0);
+    destination.write(movieToWrite.getName());
+    destination.write("|");
+    destination.write(movieToWrite.getCategory().toString());
+    destination.write("|");
+    try {
+      destination.write(Integer.toString(movieToWrite.getRating()));
+    } catch (IOException e) {
+      destination.write("-1");
+    } catch (UnratedException e) {
+      e.printStackTrace();
+    }
+    destination.write("\n");
+    destination.flush();
   }
 }
