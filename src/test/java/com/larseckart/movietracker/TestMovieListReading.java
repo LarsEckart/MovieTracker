@@ -22,7 +22,11 @@ class TestMovieListReading {
   void read_one_movie() throws Exception {
     try (Reader reader = new StringReader("Finding Nemo|Kids|5")) {
       MovieList movieList = MovieList.readFrom(reader);
+      Movie movie = movieList.getMovie(0);
       assertThat(movieList.size()).isEqualTo(1);
+      assertThat(movie.getName()).isEqualTo("Finding Nemo");
+      assertThat(movie.getCategory()).isEqualTo(Category.KIDS);
+      assertThat(movie.getRating()).isEqualTo(5);
     }
   }
 }
