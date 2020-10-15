@@ -16,8 +16,8 @@ class CustomMovieListRenderer extends JLabel implements ListCellRenderer<Movie> 
       boolean isSelected, boolean cellHasFocus) {
 
     if (isSelected) {
-      setBackground(Color.BLACK);
-      //setForeground(Color.WHITE);
+      setBackground(list.getSelectionBackground());
+      setForeground(list.getSelectionForeground());
     } else {
       setBackground(list.getBackground());
       setForeground(list.getForeground());
