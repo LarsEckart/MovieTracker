@@ -3,6 +3,9 @@ package com.larseckart.movietracker;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
@@ -13,6 +16,7 @@ public class Movie {
   private String name;
   private int rating;
   private int numberOfRatings;
+  private List<Rating> ratings;
 
   public Movie(String name) {
     this(name, -1);
@@ -22,11 +26,12 @@ public class Movie {
     this(name, Category.UNCATEGORIZED, rating);
   }
 
-  public Movie(Movie movie) {
-    this.name = movie.name;
-    this.rating = movie.rating;
-    this.numberOfRatings = movie.numberOfRatings;
-    this.category = movie.category;
+  public Movie(Movie original) {
+    this.name = original.name;
+    this.rating = original.rating;
+    this.numberOfRatings = original.numberOfRatings;
+    this.category = original.category;
+    this.ratings = new ArrayList<>(original.rating);
   }
 
   public Movie(String name, Category category) {
@@ -38,16 +43,16 @@ public class Movie {
     checkEmpty(name);
     this.name = name;
     this.category = (category != null) ? category : Category.UNCATEGORIZED;
+    ratings = new ArrayList<>();
     if (rating >= 0) {
       this.rating = rating;
       numberOfRatings++;
+      ratings.add(new Rating(rating));
     }
   }
 
   public Movie(String name, Category category, int rating, int count) {
-    this.name = name;
-    this.category = category;
-    this.rating = rating;
+    this(name, category, rating);
     this.numberOfRatings = count;
   }
 
@@ -86,6 +91,7 @@ public class Movie {
       this.rating += aRating;
     }
     numberOfRatings++;
+    ratings.add(new Rating(aRating));
   }
 
   public void setRating(int rating) {
@@ -161,5 +167,9 @@ public class Movie {
 
   private void writeSeparator(Writer destination) throws IOException {
     destination.write(DELIMITER);
+  }
+
+  public Iterator<Rating> ratings() {
+    return ratings.iterator();
   }
 }
