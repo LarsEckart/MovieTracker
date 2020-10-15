@@ -18,11 +18,11 @@ class MovieListFilterTests {
   @Test
   void subsets() throws Exception {
     starWars = new Movie("Star Wars", Category.SCIFI, 5);
-    legoMovie = new Movie("Lego Movie", Category.Kids, 5);
+    legoMovie = new Movie("Lego Movie", Category.KIDS, 5);
     starTrek = new Movie("Star Trek", Category.SCIFI, 3);
     starGate = new Movie("Stargate", Category.SCIFI);
     theShining = new Movie("The Shining", Category.HORROR, 2);
-    findingNemo = new Movie("Finding Nemo", Category.Kids, 5);
+    findingNemo = new Movie("Finding Nemo", Category.KIDS, 5);
 
     movieList = new MovieList();
     movieList.add(starWars);
@@ -36,17 +36,17 @@ class MovieListFilterTests {
     kidsList.add(legoMovie);
     kidsList.add(findingNemo);
 
-    assertThat(kidsList).isEqualTo(movieList.categorySublist(Category.Kids));
+    assertThat(kidsList).isEqualTo(movieList.categorySublist(Category.KIDS));
   }
 
   @Test
   void all_subset() throws Exception {
     starWars = new Movie("Star Wars", Category.SCIFI, 5);
-    legoMovie = new Movie("Lego Movie", Category.Kids, 5);
+    legoMovie = new Movie("Lego Movie", Category.KIDS, 5);
     starTrek = new Movie("Star Trek", Category.SCIFI, 3);
     starGate = new Movie("Stargate", Category.SCIFI);
     theShining = new Movie("The Shining", Category.HORROR, 2);
-    findingNemo = new Movie("Finding Nemo", Category.Kids, 5);
+    findingNemo = new Movie("Finding Nemo", Category.KIDS, 5);
 
     movieList = new MovieList();
     movieList.add(starWars);

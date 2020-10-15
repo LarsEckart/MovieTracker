@@ -1,5 +1,7 @@
 package com.larseckart.movietracker;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Objects;
 
 public class Movie {
@@ -111,5 +113,19 @@ public class Movie {
 
   public void setCategory(Category category) {
     this.category = category;
+  }
+
+  void
+  writeMovie(Writer destination) throws IOException {
+    destination.write(getName());
+    destination.write("|");
+    destination.write(getCategory().toString());
+    destination.write("|");
+    try {
+      destination.write(Integer.toString(getRating()));
+    } catch (UnratedException e) {
+      destination.write("-1");
+    }
+    destination.write("\n");
   }
 }

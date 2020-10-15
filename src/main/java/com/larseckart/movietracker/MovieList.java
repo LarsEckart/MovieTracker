@@ -83,16 +83,8 @@ public class MovieList {
     }
 
     Movie movieToWrite = movies.get(0);
-    destination.write(movieToWrite.getName());
-    destination.write("|");
-    destination.write(movieToWrite.getCategory().toString());
-    destination.write("|");
-    try {
-      destination.write(Integer.toString(movieToWrite.getRating()));
-    } catch (UnratedException e) {
-      destination.write("-1");
-    }
-    destination.write("\n");
+    movieToWrite.writeMovie(destination);
     destination.flush();
   }
+
 }

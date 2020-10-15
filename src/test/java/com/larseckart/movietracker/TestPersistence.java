@@ -29,4 +29,12 @@ class TestPersistence {
     movieList.writeTo(destination);
     assertThat(destination.toString()).isEqualTo("Star Wars|Science Fiction|4\n");
   }
+
+  @Test
+  void writing_multiple_movie() throws Exception {
+    movieList.add(new Movie("Star Wars", Category.SCIFI, 4));
+    movieList.add(new Movie("Finding Nemo", Category.KIDS, 5));
+    movieList.writeTo(destination);
+    assertThat(destination.toString()).isEqualTo("Star Wars|Science Fiction|4\nFinding Nemo|Kids|5\n");
+  }
 }

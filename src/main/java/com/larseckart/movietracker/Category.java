@@ -11,7 +11,7 @@ public class Category {
   public static final Category HORROR = new Category("Horror");
   public static final Category COMEDY = new Category("Comedy");
   public static final Category DRAMA = new Category("Drama");
-  public static final Category Kids = new Category("Kids");
+  public static final Category KIDS = new Category("Kids");
   public static final Category THRILLER = new Category("Thriller");
   public static final Category FANTASY = new Category("Fantasy");
   public static final Category ALL = new Category("ALL");
