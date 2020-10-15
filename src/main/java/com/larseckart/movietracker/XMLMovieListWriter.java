@@ -30,20 +30,21 @@ class XMLMovieListWriter implements MovieListWriter {
     destination.write(movie.getCategory().toString());
     destination.write("\">");
     destination.write("\n    <ratings>");
-    Iterator<Rating> ratings = movie.ratings();
-    while (ratings.hasNext()) {
-      writeRating(ratings);
-    }
+    writeRatings(movie);
     destination.write("\n    </ratings>");
     destination.write("\n  </movie>");
   }
 
-  private void writeRating(Iterator<Rating> ratings) throws IOException {
-    destination.write("\n      <rating value=\"");
-    Rating next = ratings.next();
-    destination.write(Integer.toString(next.value()));
-    destination.write("\" source=\"");
-    destination.write(next.source());
-    destination.write("\" />");
+  private void writeRatings(Movie movie) throws IOException {
+    Iterator<Rating> ratings = movie.ratings();
+    while (ratings.hasNext()) {
+      destination.write("\n      <rating value=\"");
+      Rating next = ratings.next();
+      destination.write(Integer.toString(next.value()));
+      destination.write("\" source=\"");
+      destination.write(next.source());
+      destination.write("\" />");
+    }
   }
+
 }
