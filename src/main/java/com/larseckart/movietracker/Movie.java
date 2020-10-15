@@ -2,7 +2,6 @@ package com.larseckart.movietracker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.Writer;
 import java.util.Objects;
 import java.util.StringTokenizer;
@@ -12,9 +11,8 @@ public class Movie {
   public static final String DELIMITER = "|";
   private Category category;
   private String name;
-  private int totalRating;
-  private int numberOfRatings;
   private int rating;
+  private int numberOfRatings;
 
   public Movie(String name) {
     this(name, -1);
@@ -27,6 +25,7 @@ public class Movie {
   public Movie(Movie movie) {
     this.name = movie.name;
     this.rating = movie.rating;
+    this.numberOfRatings = movie.numberOfRatings;
     this.category = movie.category;
   }
 
@@ -39,7 +38,10 @@ public class Movie {
     checkEmpty(name);
     this.name = name;
     this.category = (category != null) ? category : Category.UNCATEGORIZED;
-    this.rating = rating;
+    if (rating >= 0) {
+      this.rating = rating;
+      numberOfRatings++;
+    }
   }
 
   public static Movie readFrom(BufferedReader reader) throws IOException {
@@ -49,7 +51,7 @@ public class Movie {
     }
 
     StringTokenizer tokenizer = new StringTokenizer(oneLine, DELIMITER);
-    try{
+    try {
       String name = tokenizer.nextToken();
       Category category = Category.getCategoryNamed(tokenizer.nextToken());
       int rating = Integer.parseInt(tokenizer.nextToken());
@@ -69,13 +71,30 @@ public class Movie {
     return this.name;
   }
 
-  public void addRating(int rating) {
-    totalRating += rating;
+  public void addRating(int aRating) {
+    if (aRating == -1) {
+      this.rating = aRating;
+    } else {
+      this.rating += aRating;
+    }
     numberOfRatings++;
   }
 
-  public int getAverageRating() {
-    return totalRating / numberOfRatings;
+  public void setRating(int rating) {
+    this.rating = rating;
+    numberOfRatings = 1;
+  }
+
+  public int getRating() throws UnratedException {
+    if (hasRating()) {
+      return rating / numberOfRatings;
+    } else {
+      throw new UnratedException();
+    }
+  }
+
+  public boolean hasRating() {
+    return numberOfRatings > 0;
   }
 
   @Override
@@ -110,22 +129,6 @@ public class Movie {
     if (newName == null) {
       throw new IllegalArgumentException("null Movie name");
     }
-  }
-
-  public boolean hasRating() {
-    return rating >= 0;
-  }
-
-  public int getRating() throws UnratedException {
-    if (hasRating()) {
-      return rating;
-    } else {
-      throw new UnratedException();
-    }
-  }
-
-  public void setRating(int rating) {
-    this.rating = rating;
   }
 
   public Category getCategory() {

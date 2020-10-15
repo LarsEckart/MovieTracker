@@ -26,14 +26,6 @@ class Movie_should {
   }
 
   @Test
-  void bad_rating() {
-    movie.addRating(5);
-    movie.addRating(3);
-
-    assertThat(movie.getAverageRating()).isEqualTo(4);
-  }
-
-  @Test
   void renaming() throws Exception {
     String newMovie = "Star Trek";
     Movie aMovie = new Movie("Star Wars");
