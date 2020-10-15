@@ -15,7 +15,6 @@ public class Movie {
   private Category category;
   private String name;
   private int rating;
-  private int numberOfRatings;
   private List<Rating> ratings;
 
   public Movie(String name) {
@@ -29,7 +28,6 @@ public class Movie {
   public Movie(Movie original) {
     this.name = original.name;
     this.rating = original.rating;
-    this.numberOfRatings = original.numberOfRatings;
     this.category = original.category;
     this.ratings = new ArrayList<>(original.ratings);
   }
@@ -46,14 +44,12 @@ public class Movie {
     ratings = new ArrayList<>();
     if (rating >= 0) {
       this.rating = rating;
-      numberOfRatings++;
       ratings.add(new Rating(rating));
     }
   }
 
   public Movie(String name, Category category, int rating, int count) {
     this(name, category, rating);
-    this.numberOfRatings = count;
     ratings = new ArrayList<>();
     for (int i = 0; i < count; i++) {
       ratings.add(new Rating(rating));
@@ -95,7 +91,8 @@ public class Movie {
 
   public void setRating(int rating) {
     this.rating = rating;
-    numberOfRatings = 1;
+    this.ratings = new ArrayList<>();
+    this.ratings.add(new Rating(rating));
   }
 
   public int getRating() throws UnratedException {
