@@ -1,6 +1,14 @@
 package com.larseckart.movietracker;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.io.Reader;
+import java.io.StringReader;
+import org.junit.jupiter.api.Test;
+
 class TestXmlMovieListReader {
+
+  private MovieListReader movieListReader = new XMLMovieListReader();
 
   private String emptyString = "";
   private String oneMoviePrefix = """
@@ -24,5 +32,10 @@ class TestXmlMovieListReader {
         </movie>
       </movielist>""";
 
-
+  @Test
+  void empty_string_to_empty_movie_list() throws Exception {
+    var reader = new StringReader(emptyString);
+    MovieList movies = movieListReader.getMovies(reader);
+    assertThat(movies.size()).isEqualTo(0);
+  }
 }
