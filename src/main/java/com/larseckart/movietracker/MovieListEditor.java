@@ -91,7 +91,8 @@ public class MovieListEditor {
       return false;
     }
     try (FileWriter writer = new FileWriter(outputFile, StandardCharsets.UTF_8)) {
-      movies.writeTo(writer);
+      MovieListWriter plainTextMovieListWriter = new PlainTextMovieListWriter(writer);
+      plainTextMovieListWriter.write(movies);
       return true;
     }
   }

@@ -3,7 +3,6 @@ package com.larseckart.movietracker;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -68,10 +67,6 @@ public class MovieList {
         .filter(m -> category.equals(m.getCategory()))
         .forEach(filtered::add);
     return filtered;
-  }
-
-  public void writeTo(Writer destination) throws IOException {
-    new PlainTextMovieListWriter(destination).write(this);
   }
 
   @Override

@@ -1,7 +1,6 @@
 package com.larseckart.movietracker;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.startsWith;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -15,23 +14,28 @@ class TestPersistence {
 
   private StringWriter destination;
   private MovieList movieList;
+  private MovieListWriter movieListWriter;
 
   @BeforeEach
   void setUp() {
     destination = new StringWriter();
+    movieListWriter = new PlainTextMovieListWriter(destination);
     movieList = new MovieList();
   }
 
   @Test
   void writingEmptyList() throws Exception {
-    movieList.writeTo(destination);
+    movieListWriter.write(movieList);
+
     assertThat(destination.toString()).isEqualTo("");
   }
 
   @Test
   void writing_one_movie() throws Exception {
     movieList.add(new Movie("Star Wars", Category.SCIFI, 4));
-    movieList.writeTo(destination);
+
+    movieListWriter.write(movieList);
+
     assertThat(destination.toString()).isEqualTo("Star Wars|Science Fiction|4|1\n");
   }
 
@@ -39,7 +43,9 @@ class TestPersistence {
   void writing_multiple_movie() throws Exception {
     movieList.add(new Movie("Star Wars", Category.SCIFI, 4));
     movieList.add(new Movie("Finding Nemo", Category.KIDS, 5));
-    movieList.writeTo(destination);
+
+    movieListWriter.write(movieList);
+
     assertThat(destination.toString())
         .isEqualTo("Star Wars|Science Fiction|4|1\nFinding Nemo|Kids|5|1\n");
   }
