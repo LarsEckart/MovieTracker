@@ -12,19 +12,6 @@ public class MovieList {
 
   private final List<Movie> movies = new ArrayList<>();
 
-  public static MovieList readFrom(Reader reader) throws IOException {
-    BufferedReader bufferedReader = new BufferedReader(reader);
-    MovieList movieList = new MovieList();
-
-    //bufferedReader.lines().map(line -> Movie.readFrom(line)).forEach(movieList::add);
-
-    for (Movie newMovie = Movie.readFrom(bufferedReader); newMovie != null;
-        newMovie = Movie.readFrom(bufferedReader)) {
-      movieList.add(newMovie);
-    }
-    return movieList;
-  }
-
   public int size() {
     return movies.size();
   }

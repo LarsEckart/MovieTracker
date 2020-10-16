@@ -9,11 +9,12 @@ import org.junit.jupiter.api.Test;
 class TestMovieListReading {
 
   private String emptyString = "";
+  private final MovieListReader movieListReader = new PlainTextMovieListReader();
 
   @Test
   void read_empty_string() throws Exception {
     try (Reader reader = new StringReader(emptyString)) {
-      MovieList movieList = MovieList.readFrom(reader);
+      MovieList movieList = movieListReader.read(reader);
       assertThat(movieList.size()).isEqualTo(0);
     }
   }
@@ -21,7 +22,7 @@ class TestMovieListReading {
   @Test
   void read_one_movie() throws Exception {
     try (Reader reader = new StringReader("Finding Nemo|Kids|8|2")) {
-      MovieList movieList = MovieList.readFrom(reader);
+      MovieList movieList = movieListReader.read(reader);
 
       assertThat(movieList.size()).isEqualTo(1);
       Movie movie = movieList.getMovie(0);
@@ -34,7 +35,7 @@ class TestMovieListReading {
   @Test
   void read_multiple_movies() throws Exception {
     try (Reader reader = new StringReader("Finding Nemo|Kids|5|1\nStar Wars|Science Fiction|9|3")) {
-      MovieList movieList = MovieList.readFrom(reader);
+      MovieList movieList = movieListReader.read(reader);
 
       assertThat(movieList.size()).isEqualTo(2);
       Movie movie = movieList.getMovie(0);
