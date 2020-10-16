@@ -6,22 +6,19 @@ import java.util.Collection;
 
 class PlainTextMovieListWriter implements MovieListWriter {
 
-  private final Writer destination;
-
-  public PlainTextMovieListWriter(Writer destination) {
-    this.destination = destination;
+  public PlainTextMovieListWriter() {
   }
 
   @Override
-  public void write(MovieList movies) throws IOException {
+  public void write(Writer destination, MovieList movies) throws IOException {
     Collection<Movie> collection = movies.getMovies();
     if (collection.isEmpty()) {
       return;
     }
 
     for (Movie movie : collection) {
-      movie.writeMovie(this.destination);
+      movie.writeMovie(destination);
     }
-    this.destination.flush();
+    destination.flush();
   }
 }

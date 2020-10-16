@@ -18,7 +18,7 @@ class XMLMovieListWriter implements MovieListWriter {
   }
 
   @Override
-  public void write(MovieList movies) throws IOException {
+  public void write(Writer writer, MovieList movies) throws IOException {
     destination.write("<movielist>\n");
     if (movies.size() > 0) {
       writeMovies(movies);

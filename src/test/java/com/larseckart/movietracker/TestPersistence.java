@@ -19,13 +19,13 @@ class TestPersistence {
   @BeforeEach
   void setUp() {
     destination = new StringWriter();
-    movieListWriter = new PlainTextMovieListWriter(destination);
+    movieListWriter = new PlainTextMovieListWriter();
     movieList = new MovieList();
   }
 
   @Test
   void writingEmptyList() throws Exception {
-    movieListWriter.write(movieList);
+    movieListWriter.write(destination, movieList);
 
     assertThat(destination.toString()).isEqualTo("");
   }
@@ -34,7 +34,7 @@ class TestPersistence {
   void writing_one_movie() throws Exception {
     movieList.add(new Movie("Star Wars", Category.SCIFI, 4));
 
-    movieListWriter.write(movieList);
+    movieListWriter.write(destination, movieList);
 
     assertThat(destination.toString()).isEqualTo("Star Wars|Science Fiction|4|1\n");
   }
@@ -44,7 +44,7 @@ class TestPersistence {
     movieList.add(new Movie("Star Wars", Category.SCIFI, 4));
     movieList.add(new Movie("Finding Nemo", Category.KIDS, 5));
 
-    movieListWriter.write(movieList);
+    movieListWriter.write(destination, movieList);
 
     assertThat(destination.toString())
         .isEqualTo("Star Wars|Science Fiction|4|1\nFinding Nemo|Kids|5|1\n");

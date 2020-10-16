@@ -22,7 +22,7 @@ class TestXmlMovieListWriter {
   void writing_empty_list() throws Exception {
     MovieListWriter writer = new XMLMovieListWriter(destination);
 
-    writer.write(movieList);
+    writer.write(destination, movieList);
 
     assertThat(destination.toString()).isEqualTo("<movielist>\n</movielist>");
   }
@@ -34,7 +34,7 @@ class TestXmlMovieListWriter {
     starWars.addRating(4, "New York Times");
     movieList.add(starWars);
 
-    writer.write(movieList);
+    writer.write(destination, movieList);
 
     assertThat(destination.toString()).isEqualTo("""
         <movielist>
@@ -55,7 +55,7 @@ class TestXmlMovieListWriter {
     starWars.addRating(3, "The Independent");
     movieList.add(starWars);
 
-    writer.write(movieList);
+    writer.write(destination, movieList);
 
     String actual = destination.toString();
 
@@ -86,7 +86,7 @@ class TestXmlMovieListWriter {
     findingNemo.addRating(5, "Birgit");
     movieList.add(findingNemo);
 
-    writer.write(movieList);
+    writer.write(destination, movieList);
     String actual = destination.toString();
 
     Approvals.verify(actual);

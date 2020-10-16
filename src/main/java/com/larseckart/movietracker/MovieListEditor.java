@@ -4,16 +4,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
 public class MovieListEditor {
 
-  private final MovieListEditorView aView;
   private final MovieListReader movieListReader = new PlainFileMovieListReader();
-  private MovieList movies;
+  private final MovieListWriter movieListWriter = new PlainTextMovieListWriter();
+  private final MovieListEditorView aView;
 
+  private MovieList movies;
   private MovieList filteredMovies;
   private Movie selectedMovie;
   private Category filterCategory = Category.ALL;
@@ -93,8 +93,7 @@ public class MovieListEditor {
       return false;
     }
     try (FileWriter writer = new FileWriter(outputFile, StandardCharsets.UTF_8)) {
-      MovieListWriter plainTextMovieListWriter = new PlainTextMovieListWriter(writer);
-      plainTextMovieListWriter.write(movies);
+      movieListWriter.write(writer, movies);
       return true;
     }
   }
