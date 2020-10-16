@@ -110,7 +110,7 @@ public class MovieListEditor {
     }
 
     var reader = new FileReader(inputFile, StandardCharsets.UTF_8);
-    movies = movieListReader.getMovies(reader);
+    movies = movieListReader.read(reader);
     filterOnCategory(Category.ALL);
     return true;
   }

@@ -2,11 +2,51 @@ package com.larseckart.movietracker;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 
 class XMLMovieListReader implements MovieListReader {
 
   @Override
-  public MovieList getMovies(Reader reader) throws IOException {
-    return new MovieList();
+  public MovieList read(Reader reader) throws IOException {
+    SAXBuilder builder = new SAXBuilder();
+    Document theMovieListDocument;
+    try{
+      theMovieListDocument = builder.build(reader);
+    } catch (JDOMException e) {
+      if (e.getMessage().contains("Premature end")) {
+        return new MovieList();
+      }
+      throw new IOException(e);
+    }
+    MovieList theNewList = processDocument(theMovieListDocument);
+    return theNewList;
+  }
+
+  private MovieList processDocument(Document theMovieListDocument) {
+    MovieList movieList = new MovieList();
+
+    Element movieListElement = theMovieListDocument.getRootElement();
+    List<Element> movies = movieListElement.getChildren();
+    for (Element movieElement : movies) {
+      String name = movieElement.getAttributeValue("name");
+      Category category = Category.getCategoryNamed(movieElement.getAttributeValue("category"));
+      Movie movie = new Movie(name, category);
+
+      Element ratingsElement = movieElement.getChild("ratings");
+      List<Element> ratingElements = ratingsElement.getChildren();
+      for (Element ratingElement : ratingElements) {
+        int value = Integer.parseInt(ratingElement.getAttributeValue("value"));
+        String source = ratingElement.getAttributeValue("source");
+        movie.addRating(value, source);
+      }
+
+      movieList.add(movie);
+    }
+
+    return movieList;
   }
 }

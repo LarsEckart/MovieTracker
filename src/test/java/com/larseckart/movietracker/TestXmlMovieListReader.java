@@ -1,8 +1,8 @@
 package com.larseckart.movietracker;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-import java.io.Reader;
 import java.io.StringReader;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +15,8 @@ class TestXmlMovieListReader {
       <movielist>
           <movie name="Star Wars" category="Science Fiction">
             <ratings>
-              <rating value="4" source="New York Times" />
+              <rating value="5" source="New York Times" />
               <rating value="3" source="Washington Post" />
-              <rating value="3" source="The Independent" />
             </ratings>
           </movie>""";
   private String oneMovie = oneMoviePrefix + "</movielist>";
@@ -35,7 +34,18 @@ class TestXmlMovieListReader {
   @Test
   void empty_string_to_empty_movie_list() throws Exception {
     var reader = new StringReader(emptyString);
-    MovieList movies = movieListReader.getMovies(reader);
+    MovieList movies = movieListReader.read(reader);
     assertThat(movies.size()).isEqualTo(0);
+  }
+
+  @Test
+  void reading_one_movie() throws Exception {
+    var reader = new StringReader(oneMovie);
+    MovieList movies = movieListReader.read(reader);
+    assertAll(
+        () -> assertThat(movies.size()).isEqualTo(1),
+        () -> assertThat(movies.getMovie(0).getName()).isEqualTo("Star Wars"),
+        () -> assertThat(movies.getMovie(0).getCategory()).isEqualTo(Category.SCIFI),
+        () -> assertThat(movies.getMovie(0).getRating()).isEqualTo(4));
   }
 }

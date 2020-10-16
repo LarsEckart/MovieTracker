@@ -9,7 +9,7 @@ public class PlainFileMovieListReader implements MovieListReader {
   }
 
   @Override
-  public MovieList getMovies(Reader reader) throws IOException {
+  public MovieList read(Reader reader) throws IOException {
     return MovieList.readFrom(reader);
   }
 }
