@@ -20,7 +20,7 @@ class TestXmlMovieListWriter {
 
   @Test
   void writing_empty_list() throws Exception {
-    MovieListWriter writer = new XMLMovieListWriter(destination);
+    MovieListWriter writer = new XMLMovieListWriter();
 
     writer.write(destination, movieList);
 
@@ -29,7 +29,7 @@ class TestXmlMovieListWriter {
 
   @Test
   void writing_list_containing_one_movie_with_one_rating() throws Exception {
-    MovieListWriter writer = new XMLMovieListWriter(destination);
+    MovieListWriter writer = new XMLMovieListWriter();
     Movie starWars = new Movie("Star Wars", Category.SCIFI);
     starWars.addRating(4, "New York Times");
     movieList.add(starWars);
@@ -48,7 +48,7 @@ class TestXmlMovieListWriter {
 
   @Test
   void writing_list_containing_one_movie_with_multiple_ratings() throws Exception {
-    MovieListWriter writer = new XMLMovieListWriter(destination);
+    MovieListWriter writer = new XMLMovieListWriter();
     Movie starWars = new Movie("Star Wars", Category.SCIFI);
     starWars.addRating(4, "New York Times");
     starWars.addRating(3, "Washington Post");
@@ -74,7 +74,7 @@ class TestXmlMovieListWriter {
 
   @Test
   void writing_list_containing_multiple_movie_with_multiple_ratings() throws Exception {
-    MovieListWriter writer = new XMLMovieListWriter(destination);
+    MovieListWriter writer = new XMLMovieListWriter();
     Movie starWars = new Movie("Star Wars", Category.SCIFI);
     starWars.addRating(4, "New York Times");
     starWars.addRating(3, "Washington Post");

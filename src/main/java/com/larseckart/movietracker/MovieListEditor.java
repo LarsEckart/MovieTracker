@@ -9,8 +9,8 @@ import java.util.Vector;
 
 public class MovieListEditor {
 
-  private final MovieListReader movieListReader = new PlainFileMovieListReader();
-  private final MovieListWriter movieListWriter = new PlainTextMovieListWriter();
+  private final MovieListReader movieListReader = new XMLMovieListReader();
+  private final MovieListWriter movieListWriter = new XMLMovieListWriter();
   private final MovieListEditorView aView;
 
   private MovieList movies;
