@@ -48,4 +48,18 @@ class TestXmlMovieListReader {
         () -> assertThat(movies.getMovie(0).getCategory()).isEqualTo(Category.SCIFI),
         () -> assertThat(movies.getMovie(0).getRating()).isEqualTo(4));
   }
+
+  @Test
+  void reading_multiple_movies() throws Exception {
+    var reader = new StringReader(multiMovieString);
+    MovieList movies = movieListReader.read(reader);
+    assertAll(
+        () -> assertThat(movies.size()).isEqualTo(2),
+        () -> assertThat(movies.getMovie(0).getName()).isEqualTo("Star Wars"),
+        () -> assertThat(movies.getMovie(0).getCategory()).isEqualTo(Category.SCIFI),
+        () -> assertThat(movies.getMovie(0).getRating()).isEqualTo(4),
+        () -> assertThat(movies.getMovie(1).getName()).isEqualTo("Finding Nemo"),
+        () -> assertThat(movies.getMovie(1).getCategory()).isEqualTo(Category.KIDS),
+        () -> assertThat(movies.getMovie(1).getRating()).isEqualTo(5));
+  }
 }
