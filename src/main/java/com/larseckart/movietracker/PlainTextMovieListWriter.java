@@ -17,7 +17,14 @@ class PlainTextMovieListWriter implements MovieListWriter {
     }
 
     for (Movie movie : collection) {
-      movie.writeMovie(destination);
+      destination.write(movie.getName());
+      destination.write("|");
+      destination.write(movie.getCategory().toString());
+      destination.write("|");
+      destination.write(Integer.toString(movie.getRatings().stream().mapToInt(Rating::value).sum()));
+      destination.write("|");
+      destination.write(Integer.toString(movie.getRatings().size()));
+      destination.write("\n");
     }
     destination.flush();
   }

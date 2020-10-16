@@ -11,7 +11,6 @@ import java.util.StringTokenizer;
 
 public class Movie {
 
-  public static final String DELIMITER = "|";
   private Category category;
   private String name;
   private List<Rating> ratings;
@@ -59,7 +58,7 @@ public class Movie {
       return null;
     }
 
-    StringTokenizer tokenizer = new StringTokenizer(oneLine, DELIMITER);
+    StringTokenizer tokenizer = new StringTokenizer(oneLine, "|");
     try {
       String name = tokenizer.nextToken();
       Category category = Category.getCategoryNamed(tokenizer.nextToken());
@@ -93,6 +92,10 @@ public class Movie {
     ratings.add(rating);
   }
 
+  public List<Rating> getRatings() {
+    return ratings;
+  }
+
   public void setRating(int rating) {
     this.ratings = new ArrayList<>();
     this.ratings.add(new Rating(rating));
@@ -112,6 +115,26 @@ public class Movie {
 
   public Iterator<Rating> ratings() {
     return ratings.iterator();
+  }
+
+  public void rename(String newName) {
+    checkNull(newName);
+    checkEmpty(newName);
+    name = newName;
+  }
+
+  private void checkNull(String newName) {
+    if (newName == null) {
+      throw new IllegalArgumentException("null Movie name");
+    }
+  }
+
+  public Category getCategory() {
+    return category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
   }
 
   @Override
@@ -136,38 +159,4 @@ public class Movie {
     return Objects.hash(name);
   }
 
-  public void rename(String newName) {
-    checkNull(newName);
-    checkEmpty(newName);
-    name = newName;
-  }
-
-  private void checkNull(String newName) {
-    if (newName == null) {
-      throw new IllegalArgumentException("null Movie name");
-    }
-  }
-
-  public Category getCategory() {
-    return category;
-  }
-
-  public void setCategory(Category category) {
-    this.category = category;
-  }
-
-  void writeMovie(Writer destination) throws IOException {
-    destination.write(getName());
-    writeSeparator(destination);
-    destination.write(getCategory().toString());
-    writeSeparator(destination);
-    destination.write(Integer.toString(ratings.stream().mapToInt(Rating::value).sum()));
-    writeSeparator(destination);
-    destination.write(Integer.toString(ratings.size()));
-    destination.write("\n");
-  }
-
-  private void writeSeparator(Writer destination) throws IOException {
-    destination.write(DELIMITER);
-  }
 }
