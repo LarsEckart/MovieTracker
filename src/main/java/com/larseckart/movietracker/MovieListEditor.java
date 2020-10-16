@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Vector;
 
 public class MovieListEditor {
 
   private final MovieListEditorView aView;
+  private final MovieListReader movieListReader = new PlainFileMovieListReader();
   private MovieList movies;
 
   private MovieList filteredMovies;
@@ -108,9 +110,10 @@ public class MovieListEditor {
       return false;
     }
 
-    FileReader reader = new FileReader(inputFile, StandardCharsets.UTF_8);
-    movies = MovieList.readFrom(reader);
+    var reader = new FileReader(inputFile, StandardCharsets.UTF_8);
+    movies = movieListReader.getMovies(reader);
     filterOnCategory(Category.ALL);
     return true;
   }
+
 }
