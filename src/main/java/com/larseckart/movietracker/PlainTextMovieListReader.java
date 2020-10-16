@@ -3,9 +3,9 @@ package com.larseckart.movietracker;
 import java.io.IOException;
 import java.io.Reader;
 
-public class PlainFileMovieListReader implements MovieListReader {
+public class PlainTextMovieListReader implements MovieListReader {
 
-  public PlainFileMovieListReader() {
+  public PlainTextMovieListReader() {
   }
 
   @Override
