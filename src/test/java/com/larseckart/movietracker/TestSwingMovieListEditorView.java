@@ -122,20 +122,6 @@ class TestSwingMovieListEditorView {
     assertThat(newMovieField.getText()).isEqualTo("Star Trek I");
   }
 
-  @Disabled("currently changing to multiple ratings")
-  @Test
-  void select_updates_rating() {
-    mainWindow = new JFrameOperator("Movie List");
-    MovieListEditor editor =
-        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
-
-    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
-    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow,
-        new NameComponentChooser("rating"));
-    movieList.clickOnItem(0, 1);
-    assertThat(ratingCombo.getSelectedIndex()).isEqualTo(6);
-  }
-
   @Test
   void select_updates_rating_with_same_name() {
     mainWindow = new JFrameOperator("Movie List");
