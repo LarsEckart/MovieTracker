@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class TestPersistence {
@@ -50,7 +51,7 @@ class TestPersistence {
         .isEqualTo("Star Wars|Science Fiction|4|1\nFinding Nemo|Kids|5|1\n");
   }
 
-
+  @Disabled("should be moved to another file, this is duplicate of previous test or for logical layer")
   @Test
   void test_saving() throws Exception {
     Movie starWars = new Movie("Star Wars", Category.SCIFI, 4);
