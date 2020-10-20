@@ -54,7 +54,7 @@ class TestSwingMovieListEditorView {
     MovieListEditor editor =
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
-    JListOperator movieList = new JListOperator(mainWindow);
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
     var listModel = movieList.getModel();
     assertThat(listModel.getSize()).isEqualTo(movies.size());
     for (int i = 0; i < movies.size(); i++) {
@@ -78,7 +78,7 @@ class TestSwingMovieListEditorView {
     JButtonOperator addButton = new JButtonOperator(mainWindow, "Add");
     addButton.doClick();
 
-    JListOperator movieList = new JListOperator(mainWindow);
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
     var listModel = movieList.getModel();
     assertThat(listModel.getSize()).isEqualTo(movies.size());
     for (int i = 0; i < movies.size(); i++) {
@@ -92,7 +92,7 @@ class TestSwingMovieListEditorView {
     MovieListEditor editor =
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
-    JListOperator movieList = new JListOperator(mainWindow);
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
     movieList.clickOnItem(1, 1);
 
     JTextFieldOperator newMovieField = new JTextFieldOperator(mainWindow);
@@ -105,7 +105,7 @@ class TestSwingMovieListEditorView {
     MovieListEditor editor =
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
-    JListOperator movieList = new JListOperator(mainWindow);
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
     movieList.clickOnItem(1, 1);
 
     JTextFieldOperator newMovieField = new JTextFieldOperator(mainWindow);
@@ -126,7 +126,7 @@ class TestSwingMovieListEditorView {
     MovieListEditor editor =
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
-    JListOperator movieList = new JListOperator(mainWindow);
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
     JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow,
         new NameComponentChooser("rating"));
     movieList.clickOnItem(0, 1);
@@ -139,7 +139,7 @@ class TestSwingMovieListEditorView {
     MovieListEditor editor =
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
-    JListOperator movieList = new JListOperator(mainWindow);
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
     JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow,
         new NameComponentChooser("rating"));
     movieList.clickOnItem(0, 1);
@@ -188,7 +188,7 @@ class TestSwingMovieListEditorView {
     MovieListEditor editor =
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
-    JListOperator movieList = new JListOperator(mainWindow);
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
     JComboBoxOperator categoryCombo = new JComboBoxOperator(mainWindow,
         Category.UNCATEGORIZED.toString());
 
