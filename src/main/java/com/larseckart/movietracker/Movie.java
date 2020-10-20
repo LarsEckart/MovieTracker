@@ -95,11 +95,6 @@ public class Movie {
     return ratings;
   }
 
-  public void setRating(int rating) {
-    this.ratings = new ArrayList<>();
-    this.ratings.add(new Rating(rating));
-  }
-
   public int getRating() throws UnratedException {
     if (hasRating()) {
       return ratings.stream().mapToInt(Rating::value).sum() / ratings.size();

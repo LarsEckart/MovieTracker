@@ -69,7 +69,7 @@ public class TestLogicalLayer {
   }
 
   @Test
-  void selecting() throws Exception {
+  void selecting() {
     mockView.setMovies(movies);
 
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
@@ -80,18 +80,14 @@ public class TestLogicalLayer {
     editor.select(3);
 
     verify(mockView).setNameField("Star Wars");
-    verify(mockView).setRatingField(6);
 
     verify(mockView).setNameField("Star Trek");
-    verify(mockView).setRatingField(4);
 
     verify(mockView).setNameField("Stargate");
-    verify(mockView).setRatingField(0);
 
     verify(mockView, times(3)).setCategoryField(Category.SCIFI);
 
     verify(mockView).setNameField("The Shining");
-    verify(mockView).setRatingField(3);
     verify(mockView).setCategoryField(Category.HORROR);
   }
 
@@ -109,7 +105,6 @@ public class TestLogicalLayer {
   @Test
   void updating() throws UnratedException {
     given(mockView.getNameField()).willReturn("Star Trek I");
-    given(mockView.getRatingField()).willReturn(6);
     given(mockView.getCategoryField()).willReturn(Category.COMEDY);
 
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
@@ -117,17 +112,14 @@ public class TestLogicalLayer {
     editor.update();
 
     verify(mockView).setNameField("Star Trek");
-    verify(mockView).setRatingField(4);
     verify(mockView).setCategoryField(Category.SCIFI);
 
     verify(mockView).getNameField();
-    verify(mockView).getRatingField();
     verify(mockView).getCategoryField();
     // mockito doesnt understand the difference in list contents, we call it once with movies and
     // once with updated Movies but for mockito it's the same call (since objects are the same,
     // but changed values)
     verify(mockView, times(3)).setMovies(movies);
-    assertThat(starTrek.getRating()).isEqualTo(5);
     assertThat(starTrek.getCategory()).isEqualTo(Category.COMEDY);
   }
 
@@ -158,7 +150,7 @@ public class TestLogicalLayer {
   }
 
   @Test
-  void add_rating_to_movie() throws Exception {
+  void add_rating_to_movie() {
     MovieListEditor editor = new MovieListEditor(movieList, mockView);
     editor.select(0);
     given(mockView.getRatingSourceField()).willReturn("Dave");

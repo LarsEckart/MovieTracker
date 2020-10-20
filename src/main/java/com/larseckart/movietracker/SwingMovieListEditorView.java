@@ -63,16 +63,6 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   }
 
   @Override
-  public int getRatingField() {
-    return ratingField.getSelectedIndex();
-  }
-
-  @Override
-  public void setRatingField(int rating) {
-    ratingField.setSelectedIndex(rating);
-  }
-
-  @Override
   public void setEditor(MovieListEditor anEditor) {
     myEditor = anEditor;
   }
@@ -142,7 +132,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     getContentPane().add(initButtonPanel());
 
     pack();
-    setSize(300, 500);
+    setSize(300, 650);
   }
 
   private JMenuBar initMenuBar() {

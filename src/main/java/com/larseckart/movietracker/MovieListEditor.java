@@ -30,7 +30,7 @@ public class MovieListEditor {
   public void add() {
     String newName = aView.getNameField();
     try {
-      Movie newMovie = new Movie(newName, aView.getCategoryField(), aView.getRatingField() - 1);
+      Movie newMovie = new Movie(newName, aView.getCategoryField());
       movies.add(newMovie);
       updateMovieList();
     } catch (DuplicateMovieException e) {
@@ -46,12 +46,6 @@ public class MovieListEditor {
       aView.setNameField(selectedMovie.getName());
       aView.setCategoryField(selectedMovie.getCategory());
       aView.setRatings(selectedMovie.getRatings());
-
-      try {
-        aView.setRatingField(selectedMovie.getRating() + 1);
-      } catch (UnratedException e) {
-        aView.setRatingField(0);
-      }
     }
   }
 
@@ -74,7 +68,6 @@ public class MovieListEditor {
   }
 
   private void updateMovieRating() {
-    selectedMovie.setRating(aView.getRatingField() - 1);
     selectedMovie.setCategory(aView.getCategoryField());
     filterOnCategory(filterCategory);
   }

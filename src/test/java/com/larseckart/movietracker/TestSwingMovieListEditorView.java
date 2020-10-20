@@ -77,7 +77,7 @@ class TestSwingMovieListEditorView {
     JTextFieldOperator newMovieField = new JTextFieldOperator(mainWindow);
     newMovieField.enterText(LOST_IN_SPACE);
 
-    JButtonOperator addButton = new JButtonOperator(mainWindow, "Add");
+    JButtonOperator addButton = new JButtonOperator(mainWindow, new NameComponentChooser("add"));
     addButton.doClick();
 
     JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
@@ -226,7 +226,7 @@ class TestSwingMovieListEditorView {
     JTextFieldOperator newMovieField = new JTextFieldOperator(mainWindow);
     newMovieField.enterText(starWars.getName());
 
-    JButtonOperator addButton = new JButtonOperator(mainWindow, "Add");
+    JButtonOperator addButton = new JButtonOperator(mainWindow, new NameComponentChooser("add"));
     addButton.pushNoBlock();
 
     JDialogOperator messageDialog = new JDialogOperator("Duplicate Movie");

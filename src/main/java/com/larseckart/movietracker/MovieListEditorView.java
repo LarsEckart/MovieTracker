@@ -9,11 +9,7 @@ public interface MovieListEditorView {
 
   void setNameField(String name);
 
-  void setRatingField(int rating);
-
   String getNameField();
-
-  int getRatingField();
 
   void setEditor(MovieListEditor anEditor);
 
