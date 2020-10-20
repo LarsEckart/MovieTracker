@@ -31,7 +31,7 @@ class TestXmlMovieListWriter {
   void writing_list_containing_one_movie_with_one_rating() throws Exception {
     MovieListWriter writer = new XMLMovieListWriter();
     Movie starWars = new Movie("Star Wars", Category.SCIFI);
-    starWars.addRating(new Rating(4, "New York Times"));
+    starWars.addRating(new Rating(4, "New York Times", "Nice, fluffy"));
     movieList.add(starWars);
 
     writer.write(destination, movieList);
@@ -40,7 +40,7 @@ class TestXmlMovieListWriter {
         <movielist>
           <movie name="Star Wars" category="Science Fiction">
             <ratings>
-              <rating value="4" source="New York Times" />
+              <rating value="4" source="New York Times">Nice, fluffy</rating>
             </ratings>
           </movie>
         </movielist>""");

@@ -9,8 +9,10 @@ class XMLMovieListWriter implements MovieListWriter {
 
   private final MessageFormat movieFormat = new MessageFormat(
       "  <movie name=\"{0}\" category=\"{1}\">");
-  private final MessageFormat ratingFormat = new MessageFormat(
+  private final MessageFormat ratingFormatWithoutReview = new MessageFormat(
       "\n      <rating value=\"{0,number,integer}\" source=\"{1}\" />");
+  private final MessageFormat ratingFormatWithReview = new MessageFormat(
+      "\n      <rating value=\"{0,number,integer}\" source=\"{1}\">{2}</rating>");
 
   public XMLMovieListWriter() {
   }
@@ -39,7 +41,13 @@ class XMLMovieListWriter implements MovieListWriter {
     Iterator<Rating> ratings = movie.ratings();
     while (ratings.hasNext()) {
       var rating = ratings.next();
-      destination.write(ratingFormat.format(new Object[]{rating.value(), rating.source()}));
+      if (rating.hasReview()) {
+        destination
+            .write(ratingFormatWithReview.format(new Object[]{rating.value(), rating.source(), rating.review()}));
+      } else {
+        destination
+            .write(ratingFormatWithoutReview.format(new Object[]{rating.value(), rating.source()}));
+      }
     }
     destination.write("\n    </ratings>");
   }

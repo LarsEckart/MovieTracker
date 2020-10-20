@@ -29,4 +29,8 @@ record Rating(int value, String source, String review) {
   public int hashCode() {
     return Objects.hash(value, source);
   }
+
+  public boolean hasReview() {
+    return review != null & !review.isEmpty();
+  }
 }
