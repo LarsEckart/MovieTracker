@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.BorderFactory;
@@ -39,6 +40,8 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   private JComboBox<Category> categoryField;
   private JComboBox<Category> categoryFilterField;
   private JList<Rating> ratingList;
+  private JTextField ratingSourceField;
+  private JComboBox ratingValueField;
 
   public SwingMovieListEditorView() {
     super();
@@ -122,12 +125,12 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
 
   @Override
   public int getRatingValueField() {
-    return -2;
+    return ratingValueField.getSelectedIndex();
   }
 
   @Override
   public String getRatingSourceField() {
-    return null;
+    return ratingSourceField.getText();
   }
 
   public void init() {
@@ -218,9 +221,38 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     detailPanel.add(Box.createRigidArea(new Dimension(0, 5)));
     detailPanel.add(initRatingCombo());
     detailPanel.add(initRatingList());
+    detailPanel.add(initRatingSourceField());
+    detailPanel.add(initRatingValueField());
+    detailPanel.add(initAddRatingButton());
     detailPanel.add(Box.createRigidArea(new Dimension(0, 5)));
     detailPanel.add(initCategoryField());
     return detailPanel;
+  }
+
+  private Component initAddRatingButton() {
+    JButton addButton = new JButton("Add Rating");
+    addButton.setName("addRating");
+    addButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        myEditor.addRating();
+      }
+    });
+    return addButton;
+  }
+
+  private Component initRatingValueField() {
+    List<ImageIcon> ratingIconsWithNA = Arrays.asList(RatingRenderer.icons());
+    List<ImageIcon> ratingIconsWithoutNA = ratingIconsWithNA.subList(1, 7);
+    ratingValueField = new JComboBox<>(ratingIconsWithoutNA.toArray(new ImageIcon[0]));
+    ratingValueField.setName("ratingValue");
+    return ratingValueField;
+  }
+
+  private Component initRatingSourceField() {
+    ratingSourceField = new JTextField(16);
+    ratingSourceField.setName("ratingSource");
+    return ratingSourceField;
   }
 
   private JScrollPane initRatingList() {
