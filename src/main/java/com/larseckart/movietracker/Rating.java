@@ -2,10 +2,14 @@ package com.larseckart.movietracker;
 
 import java.util.Objects;
 
-record Rating(int value, String source) {
+record Rating(int value, String source, String review) {
 
   public Rating(int rating) {
     this(rating, "Anonymous");
+  }
+
+  public Rating(int rating, String source) {
+    this(rating, source, "");
   }
 
   @Override
