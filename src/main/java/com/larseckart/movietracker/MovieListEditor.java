@@ -45,6 +45,7 @@ public class MovieListEditor {
       selectedMovie = filteredMovies.getMovie(index);
       aView.setNameField(selectedMovie.getName());
       aView.setCategoryField(selectedMovie.getCategory());
+      aView.setRatings(selectedMovie.getRatings());
 
       try {
         aView.setRatingField(selectedMovie.getRating() + 1);

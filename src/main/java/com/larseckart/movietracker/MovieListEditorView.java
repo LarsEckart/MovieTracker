@@ -1,6 +1,7 @@
 package com.larseckart.movietracker;
 
 import java.io.File;
+import java.util.List;
 import java.util.Vector;
 
 public interface MovieListEditorView {
@@ -26,4 +27,6 @@ public interface MovieListEditorView {
   File getFile(String name);
 
   File getFileToLoad();
+
+  void setRatings(List<Rating> ratings);
 }

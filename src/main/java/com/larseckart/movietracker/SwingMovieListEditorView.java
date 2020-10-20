@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -111,6 +112,11 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     } else {
       return null;
     }
+  }
+
+  @Override
+  public void setRatings(List<Rating> ratings) {
+
   }
 
   public void init() {
