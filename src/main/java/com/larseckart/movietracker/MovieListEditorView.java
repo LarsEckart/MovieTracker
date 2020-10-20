@@ -2,11 +2,10 @@ package com.larseckart.movietracker;
 
 import java.io.File;
 import java.util.List;
-import java.util.Vector;
 
 public interface MovieListEditorView {
 
-  void setMovies(Vector<Movie> movies);
+  void setMovies(List<Movie> movies);
 
   void setNameField(String name);
 

@@ -44,8 +44,8 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   }
 
   @Override
-  public void setMovies(Vector<Movie> movies) {
-    movieList.setListData(movies);
+  public void setMovies(List<Movie> movies) {
+    movieList.setListData(movies.toArray(new Movie[0]));
   }
 
   @Override
@@ -249,7 +249,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   }
 
   private Component initCategoryFilterField() {
-    categoryFilterField = new JComboBox<>(Category.categories());
+    categoryFilterField = new JComboBox<>(Category.categories().toArray(new Category[0]));
     categoryFilterField.setName("categoryFilter");
     categoryFilterField.setSelectedItem(Category.ALL);
     categoryFilterField.addActionListener(new ActionListener() {
@@ -270,7 +270,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   }
 
   private Component initCategoryField() {
-    categoryField = new JComboBox<>(Category.categories());
+    categoryField = new JComboBox<>(Category.categories().toArray(new Category[0]));
     categoryField.setName("category");
     categoryField.setSelectedItem(Category.UNCATEGORIZED);
     return categoryField;

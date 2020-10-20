@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class MovieListEditor {
 
@@ -23,7 +23,7 @@ public class MovieListEditor {
     this.movies = movieList;
     this.filteredMovies = movies;
     this.aView = aView;
-    aView.setMovies(new Vector<>(movieList.getMovies()));
+    aView.setMovies(new ArrayList<>(movieList.getMovies()));
     aView.setEditor(this);
   }
 
@@ -80,7 +80,7 @@ public class MovieListEditor {
   }
 
   private void updateMovieList() {
-    aView.setMovies(new Vector<>(filteredMovies.getMovies()));
+    aView.setMovies(new ArrayList<>(filteredMovies.getMovies()));
   }
 
   public void filterOnCategory(Category category) {

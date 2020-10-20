@@ -2,7 +2,6 @@ package com.larseckart.movietracker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -48,7 +47,7 @@ public class Movie {
     this(name, category, rating);
     ratings = new ArrayList<>();
     for (int i = 0; i < count; i++) {
-      ratings.add(new Rating(rating/count));
+      ratings.add(new Rating(rating / count));
     }
   }
 

@@ -1,12 +1,13 @@
 package com.larseckart.movietracker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 public class Category {
 
-  private static final Vector<Category> allCategories = new Vector<>();
+  private static final List<Category> allCategories = new ArrayList<>();
   private static final Map<String, Category> categoriesByName = new HashMap<>();
 
   public static final Category UNCATEGORIZED = new Category("Uncategorized");
@@ -27,7 +28,7 @@ public class Category {
     categoriesByName.put(name, this);
   }
 
-  public static Vector<Category> categories() {
+  public static List<Category> categories() {
     return allCategories;
   }
 
