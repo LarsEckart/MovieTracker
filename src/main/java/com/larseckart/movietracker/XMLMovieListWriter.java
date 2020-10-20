@@ -9,10 +9,12 @@ class XMLMovieListWriter implements MovieListWriter {
 
   private final MessageFormat movieFormat = new MessageFormat(
       "  <movie name=\"{0}\" category=\"{1}\">");
+  private final String commonReviewFormat = "\n      <rating value=\"{0,number,integer}\" source=\"{1}\"";
   private final MessageFormat ratingFormatWithoutReview = new MessageFormat(
-      "\n      <rating value=\"{0,number,integer}\" source=\"{1}\" />");
+      commonReviewFormat + " />");
   private final MessageFormat ratingFormatWithReview = new MessageFormat(
-      "\n      <rating value=\"{0,number,integer}\" source=\"{1}\">{2}</rating>");
+      commonReviewFormat + ">{2}</rating>");
+
 
   public XMLMovieListWriter() {
   }
@@ -43,7 +45,8 @@ class XMLMovieListWriter implements MovieListWriter {
       var rating = ratings.next();
       if (rating.hasReview()) {
         destination
-            .write(ratingFormatWithReview.format(new Object[]{rating.value(), rating.source(), rating.review()}));
+            .write(ratingFormatWithReview
+                .format(new Object[]{rating.value(), rating.source(), rating.review()}));
       } else {
         destination
             .write(ratingFormatWithoutReview.format(new Object[]{rating.value(), rating.source()}));
