@@ -30,8 +30,8 @@ public class MovieListEditor {
   public void add() {
     String newName = aView.getNameField();
     try {
-      Movie newMovie = new Movie(newName, aView.getCategoryField());
-      movies.add(newMovie);
+      var movie = new Movie(newName, aView.getCategoryField());
+      movies.add(movie);
       updateMovieList();
     } catch (DuplicateMovieException e) {
       aView.duplicateException(newName);

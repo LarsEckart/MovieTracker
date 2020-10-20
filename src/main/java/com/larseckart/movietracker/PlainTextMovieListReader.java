@@ -14,12 +14,8 @@ public class PlainTextMovieListReader implements MovieListReader {
     BufferedReader bufferedReader = new BufferedReader(reader);
     MovieList movieList = new MovieList();
 
-    //bufferedReader.lines().map(line -> Movie.readFrom(line)).forEach(movieList::add);
+    bufferedReader.lines().map(line -> Movie.readFrom(line)).forEach(movieList::add);
 
-    for (Movie newMovie = Movie.readFrom(bufferedReader); newMovie != null;
-        newMovie = Movie.readFrom(bufferedReader)) {
-      movieList.add(newMovie);
-    }
     return movieList;
   }
 }

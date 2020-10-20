@@ -1,17 +1,16 @@
 package com.larseckart.movietracker;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.StringTokenizer;
 
 public class Movie {
 
-  private Category category;
   private String name;
+  private Category category;
   private List<Rating> ratings;
 
   public Movie(String name) {
@@ -22,12 +21,6 @@ public class Movie {
     this(name, Category.UNCATEGORIZED, rating);
   }
 
-  public Movie(Movie original) {
-    this.name = original.name;
-    this.category = original.category;
-    this.ratings = new ArrayList<>(original.ratings);
-  }
-
   public Movie(String name, Category category) {
     this(name, category, -1);
   }
@@ -36,14 +29,14 @@ public class Movie {
     checkNull(name);
     checkEmpty(name);
     this.name = name;
-    this.category = (category != null) ? category : Category.UNCATEGORIZED;
+    this.category = Optional.ofNullable(category).orElse(Category.UNCATEGORIZED);
     ratings = new ArrayList<>();
     if (rating >= 0) {
       ratings.add(new Rating(rating));
     }
   }
 
-  public Movie(String name, Category category, int rating, int count) {
+  private Movie(String name, Category category, int rating, int count) {
     this(name, category, rating);
     ratings = new ArrayList<>();
     for (int i = 0; i < count; i++) {
@@ -51,40 +44,53 @@ public class Movie {
     }
   }
 
-  public static Movie readFrom(BufferedReader reader) throws IOException {
-    String oneLine = reader.readLine();
-    if (oneLine == null) {
-      return null;
-    }
+  public Movie(Movie original) {
+    this.name = original.name;
+    this.category = original.category;
+    this.ratings = new ArrayList<>(original.ratings);
+  }
 
-    StringTokenizer tokenizer = new StringTokenizer(oneLine, "|");
+  public static Movie readFrom(String line) {
     try {
-      String name = tokenizer.nextToken();
-      Category category = Category.getCategoryNamed(tokenizer.nextToken());
-      int rating = Integer.parseInt(tokenizer.nextToken());
-      int count = Integer.parseInt(tokenizer.nextToken());
-      return new Movie(name, category, rating, count);
+      StringTokenizer tokenizer = new StringTokenizer(line, "|");
+      return parseLine(tokenizer);
     } catch (NumberFormatException e) {
-      throw new IOException("Badly formatted movie collection");
+      throw new IllegalArgumentException("Badly formatted movie collection");
     }
   }
 
-  private void checkEmpty(String name) {
-    if (name.isEmpty()) {
+  private static Movie parseLine(StringTokenizer tokenizer) {
+    String name = tokenizer.nextToken();
+    Category category = Category.getCategoryNamed(tokenizer.nextToken());
+    int rating = Integer.parseInt(tokenizer.nextToken());
+    int count = Integer.parseInt(tokenizer.nextToken());
+    return new Movie(name, category, rating, count);
+  }
+
+  private void checkEmpty(String aString) {
+    if (aString.isEmpty()) {
       throw new IllegalArgumentException("empty Movie name");
     }
   }
 
+  private void checkNull(String aString) {
+    if (aString == null) {
+      throw new IllegalArgumentException("null Movie name");
+    }
+  }
+
   public String getName() {
-    return this.name;
+    return name;
+  }
+
+  public void rename(String newName) {
+    checkNull(newName);
+    checkEmpty(newName);
+    name = newName;
   }
 
   public void addRating(Rating rating) {
     ratings.add(rating);
-  }
-
-  public List<Rating> getRatings() {
-    return ratings;
   }
 
   public int getRating() throws UnratedException {
@@ -95,24 +101,16 @@ public class Movie {
     }
   }
 
-  public boolean hasRating() {
-    return !ratings.isEmpty();
+  public List<Rating> getRatings() {
+    return ratings;
   }
 
   public Iterator<Rating> ratings() {
     return ratings.iterator();
   }
 
-  public void rename(String newName) {
-    checkNull(newName);
-    checkEmpty(newName);
-    name = newName;
-  }
-
-  private void checkNull(String newName) {
-    if (newName == null) {
-      throw new IllegalArgumentException("null Movie name");
-    }
+  public boolean hasRating() {
+    return !ratings.isEmpty();
   }
 
   public Category getCategory() {
@@ -144,5 +142,4 @@ public class Movie {
   public int hashCode() {
     return Objects.hash(name);
   }
-
 }

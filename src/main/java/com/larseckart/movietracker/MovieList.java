@@ -1,8 +1,5 @@
 package com.larseckart.movietracker;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -49,10 +46,8 @@ public class MovieList {
       return this;
     }
 
-    MovieList filtered = new MovieList();
-    movies.stream()
-        .filter(m -> category.equals(m.getCategory()))
-        .forEach(filtered::add);
+    var filtered = new MovieList();
+    movies.stream().filter(m -> category.equals(m.getCategory())).forEach(filtered::add);
     return filtered;
   }
 
@@ -77,5 +72,4 @@ public class MovieList {
   public int hashCode() {
     return Objects.hash(movies);
   }
-
 }

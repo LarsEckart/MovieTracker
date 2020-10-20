@@ -22,10 +22,10 @@ public class Category {
 
   private String name;
 
-  private Category(String name) {
-    this.name = name;
+  private Category(String aName) {
+    name = aName;
     allCategories.add(this);
-    categoriesByName.put(name, this);
+    categoriesByName.put(aName, this);
   }
 
   public static List<Category> categories() {
