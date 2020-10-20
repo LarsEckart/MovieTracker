@@ -38,6 +38,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   private JComboBox<ImageIcon> ratingField;
   private JComboBox<Category> categoryField;
   private JComboBox<Category> categoryFilterField;
+  private JList<Rating> ratingList;
 
   public SwingMovieListEditorView() {
     super();
@@ -116,7 +117,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
 
   @Override
   public void setRatings(List<Rating> ratings) {
-
+    ratingList.setListData(ratings.toArray(new Rating[0]));
   }
 
   public void init() {
@@ -206,9 +207,19 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     detailPanel.add(initNameField());
     detailPanel.add(Box.createRigidArea(new Dimension(0, 5)));
     detailPanel.add(initRatingCombo());
+    detailPanel.add(initRatingList());
     detailPanel.add(Box.createRigidArea(new Dimension(0, 5)));
     detailPanel.add(initCategoryField());
     return detailPanel;
+  }
+
+  private JScrollPane initRatingList() {
+    ratingList = new JList<>(new Vector<>());
+    ratingList.setName("ratings");
+    ratingList.setCellRenderer(new RatingRenderer());
+    ratingList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    return new JScrollPane(ratingList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
   }
 
   private JPanel initListPanel() {
@@ -277,7 +288,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   }
 
   private Component initRatingCombo() {
-    ratingField = new JComboBox<>(CustomMovieListRenderer.icons());
+    ratingField = new JComboBox<>(RatingRenderer.icons());
     ratingField.setName("rating");
     return ratingField;
   }

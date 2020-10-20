@@ -35,17 +35,13 @@ class TestCustomListRenderer {
   void contents() throws Exception {
     renderer.getListCellRendererComponent(list, fotr, 1, false, false);
     assertThat(renderer.getText()).isEqualTo(fotr.getName());
-    assertThat(renderer.getIcon())
-        .isEqualTo(CustomMovieListRenderer.iconForRating(fotr.getRating()));
 
     renderer.getListCellRendererComponent(list, starTrek, 1, false, false);
     assertThat(renderer.getText()).isEqualTo(starTrek.getName());
-    assertThat(renderer.getIcon())
-        .isEqualTo(CustomMovieListRenderer.iconForRating(starTrek.getRating()));
   }
 
   @Test
-  void unSelected_colours() throws Exception {
+  void unSelected_colours() {
     list.setBackground(Color.BLUE);
     list.setForeground(Color.RED);
     list.setSelectionBackground(Color.RED);

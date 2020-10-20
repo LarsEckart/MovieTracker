@@ -2,7 +2,9 @@ package com.larseckart.movietracker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Iterator;
 import java.util.Vector;
+import javax.swing.ListModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -120,6 +122,7 @@ class TestSwingMovieListEditorView {
     assertThat(newMovieField.getText()).isEqualTo("Star Trek I");
   }
 
+  @Disabled("currently changing to multiple ratings")
   @Test
   void select_updates_rating() {
     mainWindow = new JFrameOperator("Movie List");
@@ -140,10 +143,21 @@ class TestSwingMovieListEditorView {
         new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
 
     JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
-    JComboBoxOperator ratingCombo = new JComboBoxOperator(mainWindow,
-        new NameComponentChooser("rating"));
+    JListOperator ratingList = new JListOperator(mainWindow, new NameComponentChooser("ratings"));
+
     movieList.clickOnItem(0, 1);
-    assertThat(ratingCombo.getSelectedIndex()).isEqualTo(6);
+    verifyRatings(ratingList, starWars);
+  }
+
+  private void verifyRatings(JListOperator ratingList, Movie aMovie) {
+    ListModel listModel = ratingList.getModel();
+    Iterator<Rating> iterator = aMovie.ratings();
+    int i = 0;
+    while (iterator.hasNext()) {
+      Rating next = iterator.next();
+      assertThat(listModel.getElementAt(i)).isEqualTo(next);
+      i++;
+    }
   }
 
   @Test
@@ -164,6 +178,7 @@ class TestSwingMovieListEditorView {
     assertThat(categoryField.getSelectedItem()).isEqualTo(Category.SCIFI);
   }
 
+  @Disabled("currently changing to multiple ratings")
   @Test
   void test_update_rating() {
     mainWindow = new JFrameOperator("Movie List");
