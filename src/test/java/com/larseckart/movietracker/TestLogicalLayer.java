@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.util.List;
 import java.util.Vector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -154,5 +155,22 @@ public class TestLogicalLayer {
     editor.update();
 
     verify(mockView).duplicateException("Star Wars");
+  }
+
+  @Test
+  void add_rating_to_movie() throws Exception {
+    MovieListEditor editor = new MovieListEditor(movieList, mockView);
+    editor.select(0);
+    given(mockView.getRatingSourceField()).willReturn("Dave");
+    given(mockView.getRatingValueField()).willReturn(2);
+
+    editor.addRating();
+
+    verify(mockView).getRatingValueField();
+    verify(mockView).getRatingSourceField();
+    // mockito doesnt understand the difference in list contents, we call it once with movies and
+    // once with updated Movies but for mockito it's the same call (since objects are the same,
+    // but changed values)
+    verify(mockView, times(2)).setRatings(List.of(new Rating(5), new Rating(2, "Dave")));
   }
 }

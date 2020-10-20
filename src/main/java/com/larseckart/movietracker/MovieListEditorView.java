@@ -28,4 +28,8 @@ public interface MovieListEditorView {
   File getFileToLoad();
 
   void setRatings(List<Rating> ratings);
+
+  int getRatingValueField();
+
+  String getRatingSourceField();
 }

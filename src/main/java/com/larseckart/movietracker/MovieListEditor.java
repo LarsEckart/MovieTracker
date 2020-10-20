@@ -116,4 +116,12 @@ public class MovieListEditor {
     return true;
   }
 
+  public void addRating() {
+    if (selectedMovie != null) {
+      int value = aView.getRatingValueField();
+      String source = aView.getRatingSourceField();
+      selectedMovie.addRating(value, source);
+      aView.setRatings(selectedMovie.getRatings());
+    }
+  }
 }
