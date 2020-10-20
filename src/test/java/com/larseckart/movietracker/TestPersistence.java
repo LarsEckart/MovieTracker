@@ -55,7 +55,7 @@ class TestPersistence {
   @Test
   void test_saving() throws Exception {
     Movie starWars = new Movie("Star Wars", Category.SCIFI, 4);
-    starWars.addRating(4);
+    starWars.addRating(new Rating(4));
     movieList.add(starWars);
     movieList.add(new Movie("Finding Nemo", Category.KIDS, 5));
     File outputFile = File.createTempFile("testSaveAs", ".dat");

@@ -31,7 +31,7 @@ class TestXmlMovieListWriter {
   void writing_list_containing_one_movie_with_one_rating() throws Exception {
     MovieListWriter writer = new XMLMovieListWriter();
     Movie starWars = new Movie("Star Wars", Category.SCIFI);
-    starWars.addRating(4, "New York Times");
+    starWars.addRating(new Rating(4, "New York Times"));
     movieList.add(starWars);
 
     writer.write(destination, movieList);
@@ -50,9 +50,9 @@ class TestXmlMovieListWriter {
   void writing_list_containing_one_movie_with_multiple_ratings() throws Exception {
     MovieListWriter writer = new XMLMovieListWriter();
     Movie starWars = new Movie("Star Wars", Category.SCIFI);
-    starWars.addRating(4, "New York Times");
-    starWars.addRating(3, "Washington Post");
-    starWars.addRating(3, "The Independent");
+    starWars.addRating(new Rating(4, "New York Times"));
+    starWars.addRating(new Rating(3, "Washington Post"));
+    starWars.addRating(new Rating(3, "The Independent"));
     movieList.add(starWars);
 
     writer.write(destination, movieList);
@@ -76,14 +76,14 @@ class TestXmlMovieListWriter {
   void writing_list_containing_multiple_movie_with_multiple_ratings() throws Exception {
     MovieListWriter writer = new XMLMovieListWriter();
     Movie starWars = new Movie("Star Wars", Category.SCIFI);
-    starWars.addRating(4, "New York Times");
-    starWars.addRating(3, "Washington Post");
-    starWars.addRating(3, "The Independent");
+    starWars.addRating(new Rating(4, "New York Times"));
+    starWars.addRating(new Rating(3, "Washington Post"));
+    starWars.addRating(new Rating(3, "The Independent"));
     movieList.add(starWars);
     Movie findingNemo = new Movie("Finding Nemo", Category.KIDS);
-    findingNemo.addRating(5, "Lars");
-    findingNemo.addRating(5, "Oskar");
-    findingNemo.addRating(5, "Birgit");
+    findingNemo.addRating(new Rating(5, "Lars"));
+    findingNemo.addRating(new Rating(5, "Oskar"));
+    findingNemo.addRating(new Rating(5, "Birgit"));
     movieList.add(findingNemo);
 
     writer.write(destination, movieList);

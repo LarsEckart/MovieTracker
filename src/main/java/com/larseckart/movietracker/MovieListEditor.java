@@ -113,7 +113,7 @@ public class MovieListEditor {
     if (selectedMovie != null) {
       int value = aView.getRatingValueField();
       String source = aView.getRatingSourceField();
-      selectedMovie.addRating(value, source);
+      selectedMovie.addRating(new Rating(value, source));
       aView.setRatings(selectedMovie.getRatings());
     }
   }

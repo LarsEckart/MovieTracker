@@ -79,14 +79,6 @@ public class Movie {
     return this.name;
   }
 
-  public void addRating(int aRating) {
-    addRating(new Rating(aRating));
-  }
-
-  public void addRating(int aRating, String source) {
-    addRating(new Rating(aRating, source));
-  }
-
   public void addRating(Rating rating) {
     ratings.add(rating);
   }

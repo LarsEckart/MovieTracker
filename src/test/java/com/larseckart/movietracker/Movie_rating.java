@@ -29,17 +29,17 @@ class Movie_rating {
   @Test
   void adding_one_rating() throws Exception {
     Movie starTrek = new Movie("Star Trek", Category.SCIFI);
-    starTrek.addRating(3);
+    starTrek.addRating(new Rating(3));
     assertThat(starTrek.getRating()).isEqualTo(3);
   }
 
   @Test
   void adding_multiple_rating() throws Exception {
     Movie starTrek = new Movie("Star Trek", Category.SCIFI);
-    starTrek.addRating(3);
-    starTrek.addRating(5);
-    starTrek.addRating(5);
-    starTrek.addRating(3);
+    starTrek.addRating(new Rating(3));
+    starTrek.addRating(new Rating(5));
+    starTrek.addRating(new Rating(5));
+    starTrek.addRating(new Rating(3));
     assertThat(starTrek.getRating()).isEqualTo(4);
   }
 }
