@@ -16,7 +16,7 @@ class TestXmlMovieListReader {
           <movie name="Star Wars" category="Science Fiction">
             <ratings>
               <rating value="5" source="New York Times" />
-              <rating value="3" source="Washington Post" />
+              <rating value="3" source="Washington Post">Great Movie!</rating>
             </ratings>
           </movie>""";
   private String oneMovie = oneMoviePrefix + "</movielist>";
@@ -46,7 +46,10 @@ class TestXmlMovieListReader {
         () -> assertThat(movies.size()).isEqualTo(1),
         () -> assertThat(movies.getMovie(0).getName()).isEqualTo("Star Wars"),
         () -> assertThat(movies.getMovie(0).getCategory()).isEqualTo(Category.SCIFI),
-        () -> assertThat(movies.getMovie(0).getRating()).isEqualTo(4));
+        () -> assertThat(movies.getMovie(0).getRating()).isEqualTo(4),
+        () -> assertThat(movies.getMovie(0).getRatings().get(0).review()).isEqualTo(""),
+        () -> assertThat(movies.getMovie(0).getRatings().get(1).review()).isEqualTo("Great Movie!")
+    );
   }
 
   @Test

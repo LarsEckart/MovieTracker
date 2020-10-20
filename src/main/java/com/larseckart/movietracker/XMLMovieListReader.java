@@ -57,7 +57,8 @@ class XMLMovieListReader implements MovieListReader {
     try {
       int value = ratingElement.getAttribute("value").getIntValue();
       String source = ratingElement.getAttributeValue("source");
-      rating = new Rating(value, source);
+      String review = ratingElement.getText().trim();
+      rating = new Rating(value, source, review);
     } catch (DataConversionException e) {
       throw new IOException(e);
     }
