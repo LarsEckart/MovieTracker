@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 public class TestLogicalLayer {
 
   private MovieListEditorView mockView;
+
   private Vector<Movie> movies;
   private Movie starWars;
   private Movie starTrek;

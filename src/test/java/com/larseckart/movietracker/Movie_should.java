@@ -26,7 +26,7 @@ class Movie_should {
   }
 
   @Test
-  void renaming() throws Exception {
+  void renaming() {
     String newMovie = "Star Trek";
     Movie aMovie = new Movie("Star Wars");
 
@@ -36,32 +36,32 @@ class Movie_should {
   }
 
   @Test
-  void null_name() throws Exception {
+  void null_name() {
     String nullString = null;
     assertThrows(IllegalArgumentException.class, () -> new Movie(nullString));
   }
 
   @Test
-  void empty_name() throws Exception {
+  void empty_name() {
     assertThrows(IllegalArgumentException.class, () -> new Movie(""));
   }
 
   @Test
-  void rename_null_name() throws Exception {
+  void rename_null_name() {
     Movie aMovie = new Movie("Star Wars");
 
     assertThrows(IllegalArgumentException.class, () -> aMovie.rename(null));
   }
 
   @Test
-  void rename_empty_name() throws Exception {
+  void rename_empty_name() {
     Movie aMovie = new Movie("Star Wars");
 
     assertThrows(IllegalArgumentException.class, () -> aMovie.rename(""));
   }
 
   @Test
-  void copy_constructor() throws Exception {
+  void copy_constructor() {
     Movie starWars = new Movie("Star Wars");
     Movie copyOfStarWars = new Movie(starWars);
     assertThat(copyOfStarWars).isNotSameAs(starWars);
@@ -69,12 +69,12 @@ class Movie_should {
   }
 
   @Test
-  void uncategorized_movie() throws Exception {
+  void uncategorized_movie() {
     assertThat(movie.getCategory()).isEqualTo(Category.UNCATEGORIZED);
   }
 
   @Test
-  void science_fiction_category_movie() throws Exception {
+  void science_fiction_category_movie() {
     Movie alien = new Movie("Alien", Category.SCIFI);
     assertThat(alien.getCategory()).isEqualTo(Category.SCIFI);
   }
