@@ -130,6 +130,21 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     ratingReviewField.setText(review);
   }
 
+  @Override
+  public String getRatingReviewField() {
+    return ratingReviewField.getText();
+  }
+
+  @Override
+  public void setRatingSourceField(String source) {
+    ratingSourceField.setText(source);
+  }
+
+  @Override
+  public void setRatingValueField(int value) {
+    ratingValueField.setSelectedIndex(value);
+  }
+
   public void init() {
     setTitle();
     setLayout();
@@ -359,7 +374,14 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   }
 
   private Component initCategoryField() {
-    categoryField = new JComboBox<>(Category.categories().toArray(new Category[0]));
+    categoryField = new JComboBox<>(Category.categories().toArray(new Category[0])) {
+      @Override
+      public Dimension getMaximumSize() {
+        Dimension size = getPreferredSize();
+        size.width = Short.MAX_VALUE;
+        return size;
+      }
+    };
     categoryField.setName("category");
     categoryField.setSelectedItem(Category.UNCATEGORIZED);
     return categoryField;

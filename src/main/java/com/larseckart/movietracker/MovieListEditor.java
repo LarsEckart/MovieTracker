@@ -113,7 +113,8 @@ public class MovieListEditor {
     if (selectedMovie != null) {
       int value = aView.getRatingValueField();
       String source = aView.getRatingSourceField();
-      selectedMovie.addRating(new Rating(value, source));
+      String review = aView.getRatingReviewField();
+      selectedMovie.addRating(new Rating(value, source, review));
       aView.setRatings(selectedMovie.getRatings());
     }
   }
@@ -124,5 +125,7 @@ public class MovieListEditor {
     }
     Rating selectedRating = selectedMovie.getRating(index);
     aView.setRatingReviewField(selectedRating.review());
+    aView.setRatingSourceField(selectedRating.source());
+    aView.setRatingValueField(selectedRating.value());
   }
 }
