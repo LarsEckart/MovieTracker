@@ -119,6 +119,9 @@ public class MovieListEditor {
   }
 
   public void selectRating(int index) {
+    if (index < 0) {
+      return;
+    }
     Rating selectedRating = selectedMovie.getRating(index);
     aView.setRatingReviewField(selectedRating.review());
   }

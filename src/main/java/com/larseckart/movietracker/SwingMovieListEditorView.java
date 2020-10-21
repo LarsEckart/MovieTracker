@@ -127,14 +127,14 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
 
   @Override
   public void setRatingReviewField(String review) {
-
+    ratingReviewField.setText(review);
   }
 
   public void init() {
     setTitle();
     setLayout();
     setJMenuBar(initMenuBar());
-    getContentPane().add(initListPanel());
+    getContentPane().add(initMovieListPanel());
     getContentPane().add(initDetailPanel());
     getContentPane().add(initButtonPanel());
 
@@ -290,11 +290,17 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     ratingList.setName("ratings");
     ratingList.setCellRenderer(new RatingRenderer());
     ratingList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    ratingList.addListSelectionListener(new ListSelectionListener() {
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        myEditor.selectRating(ratingList.getSelectedIndex());
+      }
+    });
     return new JScrollPane(ratingList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
         ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
   }
 
-  private JPanel initListPanel() {
+  private JPanel initMovieListPanel() {
     JPanel listPane = new JPanel();
     listPane.setLayout(new BoxLayout(listPane, BoxLayout.Y_AXIS));
     listPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));

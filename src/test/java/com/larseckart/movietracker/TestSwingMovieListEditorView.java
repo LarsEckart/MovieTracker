@@ -7,6 +7,7 @@ import java.util.Vector;
 import javax.swing.ListModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -41,6 +42,7 @@ class TestSwingMovieListEditorView {
     starTrek = new Movie("Star Trek", Category.SCIFI, 3);
     starGate = new Movie("Stargate", Category.SCIFI);
     theShining = new Movie("The Shining", Category.HORROR, 2);
+    theShining.addRating(new Rating(5, "Jack,", "A timeless classic"));
 
     movieList = new MovieList();
     movieList.add(starWars);
@@ -165,7 +167,6 @@ class TestSwingMovieListEditorView {
     assertThat(categoryField.getSelectedItem()).isEqualTo(Category.SCIFI);
   }
 
-  @Disabled("currently changing to multiple ratings")
   @Test
   void test_update_rating() {
     mainWindow = new JFrameOperator("Movie List");
@@ -241,5 +242,23 @@ class TestSwingMovieListEditorView {
     JTextAreaOperator reviewField = new JTextAreaOperator(mainWindow,
         new NameComponentChooser("review"));
     assertThat(reviewField.getText()).isEqualTo("");
+  }
+
+  @Test
+  void test_rating_selection_with_review() {
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
+
+    movieList.clickOnItem(3, 1);
+
+    JListOperator ratingList = new JListOperator(mainWindow, new NameComponentChooser("ratings"));
+    ratingList.clickOnItem(1, 1);
+
+    JTextAreaOperator reviewField = new JTextAreaOperator(mainWindow,
+        new NameComponentChooser("review"));
+    assertThat(reviewField.getText()).isEqualTo("A timeless classic");
   }
 }
