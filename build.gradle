@@ -30,7 +30,7 @@ dependencies {
 }
 
 tasks.withType(JavaCompile) {
-    options.compilerArgs.add("-Xlint:all")
+    //options.compilerArgs.add("-Xlint:all")
     options.incremental = true
     
     if (jdkWithPreviewFeatures())

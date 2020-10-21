@@ -28,4 +28,6 @@ public interface MovieListEditorView {
   int getRatingValueField();
 
   String getRatingSourceField();
+
+  void setRatingReviewField(String review);
 }

@@ -117,4 +117,9 @@ public class MovieListEditor {
       aView.setRatings(selectedMovie.getRatings());
     }
   }
+
+  public void selectRating(int index) {
+    Rating selectedRating = selectedMovie.getRating(index);
+    aView.setRatingReviewField(selectedRating.review());
+  }
 }

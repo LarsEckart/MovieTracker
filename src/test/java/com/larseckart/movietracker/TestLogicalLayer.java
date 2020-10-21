@@ -165,4 +165,25 @@ public class TestLogicalLayer {
     // but changed values)
     verify(mockView, times(2)).setRatings(List.of(new Rating(5), new Rating(2, "Dave")));
   }
+
+  @Test
+  void rating_selection_without_review() throws Exception {
+    MovieListEditor editor = new MovieListEditor(movieList, mockView);
+    editor.select(0);
+    editor.selectRating(0);
+
+    verify(mockView).setRatingReviewField("");
+  }
+
+  @Test
+  void rating_selection_with_review() throws Exception {
+    String davesReview = "not bad, but kind of light.";
+    starWars.addRating(new Rating(3, "Dave", davesReview));
+
+    MovieListEditor editor = new MovieListEditor(movieList, mockView);
+    editor.select(0);
+    editor.selectRating(1);
+
+    verify(mockView).setRatingReviewField(davesReview);
+  }
 }

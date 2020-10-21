@@ -123,6 +123,11 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     return ratingSourceField.getText();
   }
 
+  @Override
+  public void setRatingReviewField(String review) {
+
+  }
+
   public void init() {
     setTitle();
     setLayout();

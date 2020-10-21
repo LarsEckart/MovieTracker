@@ -142,4 +142,8 @@ public class Movie {
   public int hashCode() {
     return Objects.hash(name);
   }
+
+  public Rating getRating(int index) {
+    return ratings.get(index);
+  }
 }
