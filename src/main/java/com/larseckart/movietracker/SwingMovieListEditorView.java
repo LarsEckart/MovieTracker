@@ -25,6 +25,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
@@ -42,6 +43,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   private JList<Rating> ratingList;
   private JTextField ratingSourceField;
   private JComboBox ratingValueField;
+  private JTextArea ratingReviewField;
 
   public SwingMovieListEditorView() {
     super();
@@ -218,10 +220,21 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     detailPanel.add(initRatingList());
     detailPanel.add(initRatingSourceField());
     detailPanel.add(initRatingValueField());
+    detailPanel.add(initRatingReviewField());
     detailPanel.add(initAddRatingButton());
     detailPanel.add(Box.createRigidArea(new Dimension(0, 5)));
     detailPanel.add(initCategoryField());
     return detailPanel;
+  }
+
+  private Component initRatingReviewField() {
+    ratingReviewField = new JTextArea();
+    ratingReviewField.setName("review");
+
+    JScrollPane scroller = new JScrollPane(ratingReviewField,
+        ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    return scroller;
   }
 
   private Component initAddRatingButton() {

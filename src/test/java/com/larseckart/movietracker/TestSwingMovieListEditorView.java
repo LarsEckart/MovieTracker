@@ -16,6 +16,7 @@ import org.netbeans.jemmy.operators.JDialogOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JLabelOperator;
 import org.netbeans.jemmy.operators.JListOperator;
+import org.netbeans.jemmy.operators.JTextAreaOperator;
 import org.netbeans.jemmy.operators.JTextFieldOperator;
 import org.netbeans.jemmy.util.NameComponentChooser;
 
@@ -222,5 +223,23 @@ class TestSwingMovieListEditorView {
 
     JButtonOperator okButton = new JButtonOperator(messageDialog, "OK");
     okButton.doClick();
+  }
+
+  @Test
+  void test_rating_selection_without_review() {
+    mainWindow = new JFrameOperator("Movie List");
+    MovieListEditor editor =
+        new MovieListEditor(movieList, (SwingMovieListEditorView) mainWindow.getWindow());
+
+    JListOperator movieList = new JListOperator(mainWindow, new NameComponentChooser("movieList"));
+
+    movieList.clickOnItem(0, 1);
+
+    JListOperator ratingList = new JListOperator(mainWindow, new NameComponentChooser("ratings"));
+    ratingList.clickOnItem(0, 1);
+
+    JTextAreaOperator reviewField = new JTextAreaOperator(mainWindow,
+        new NameComponentChooser("review"));
+    assertThat(reviewField.getText()).isEqualTo("");
   }
 }
