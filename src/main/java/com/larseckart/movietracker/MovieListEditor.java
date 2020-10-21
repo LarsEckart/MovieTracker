@@ -103,9 +103,14 @@ public class MovieListEditor {
       return false;
     }
 
-    var reader = new FileReader(inputFile, StandardCharsets.UTF_8);
+    return load(inputFile);
+  }
+
+  public boolean load(File file) throws IOException {
+    var reader = new FileReader(file, StandardCharsets.UTF_8);
     movies = movieListReader.read(reader);
     filterOnCategory(Category.ALL);
+    outputFile = file;
     return true;
   }
 
