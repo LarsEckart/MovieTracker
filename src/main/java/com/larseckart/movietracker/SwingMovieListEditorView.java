@@ -168,8 +168,10 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
   }
 
   private Component initRatingReviewField() {
-    ratingReviewField = new JTextArea();
+    ratingReviewField = new JTextArea(3, 20);
     ratingReviewField.setName("review");
+    ratingReviewField.setLineWrap(true);
+    ratingReviewField.setWrapStyleWord(true);
 
     JScrollPane scroller = new JScrollPane(ratingReviewField,
         ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
