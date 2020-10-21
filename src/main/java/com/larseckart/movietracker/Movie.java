@@ -93,12 +93,16 @@ public class Movie {
     ratings.add(rating);
   }
 
-  public int getRating() throws UnratedException {
+  public int getAverageRating() throws UnratedException {
     if (hasRating()) {
       return ratings.stream().mapToInt(Rating::value).sum() / ratings.size();
     } else {
       throw new UnratedException();
     }
+  }
+
+  public Rating getRating(int index) {
+    return ratings.get(index);
   }
 
   public List<Rating> getRatings() {
@@ -141,9 +145,5 @@ public class Movie {
   @Override
   public int hashCode() {
     return Objects.hash(name);
-  }
-
-  public Rating getRating(int index) {
-    return ratings.get(index);
   }
 }

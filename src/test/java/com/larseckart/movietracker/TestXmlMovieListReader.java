@@ -46,7 +46,7 @@ class TestXmlMovieListReader {
         () -> assertThat(movies.size()).isEqualTo(1),
         () -> assertThat(movies.getMovie(0).getName()).isEqualTo("Star Wars"),
         () -> assertThat(movies.getMovie(0).getCategory()).isEqualTo(Category.SCIFI),
-        () -> assertThat(movies.getMovie(0).getRating()).isEqualTo(4),
+        () -> assertThat(movies.getMovie(0).getAverageRating()).isEqualTo(4),
         () -> assertThat(movies.getMovie(0).getRatings().get(0).review()).isEqualTo(""),
         () -> assertThat(movies.getMovie(0).getRatings().get(1).review()).isEqualTo("Great Movie!")
     );
@@ -60,9 +60,9 @@ class TestXmlMovieListReader {
         () -> assertThat(movies.size()).isEqualTo(2),
         () -> assertThat(movies.getMovie(0).getName()).isEqualTo("Star Wars"),
         () -> assertThat(movies.getMovie(0).getCategory()).isEqualTo(Category.SCIFI),
-        () -> assertThat(movies.getMovie(0).getRating()).isEqualTo(4),
+        () -> assertThat(movies.getMovie(0).getAverageRating()).isEqualTo(4),
         () -> assertThat(movies.getMovie(1).getName()).isEqualTo("Finding Nemo"),
         () -> assertThat(movies.getMovie(1).getCategory()).isEqualTo(Category.KIDS),
-        () -> assertThat(movies.getMovie(1).getRating()).isEqualTo(5));
+        () -> assertThat(movies.getMovie(1).getAverageRating()).isEqualTo(5));
   }
 }

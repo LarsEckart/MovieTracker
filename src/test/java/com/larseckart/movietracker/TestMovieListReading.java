@@ -28,7 +28,7 @@ class TestMovieListReading {
       Movie movie = movieList.getMovie(0);
       assertThat(movie.getName()).isEqualTo("Finding Nemo");
       assertThat(movie.getCategory()).isEqualTo(Category.KIDS);
-      assertThat(movie.getRating()).isEqualTo(4);
+      assertThat(movie.getAverageRating()).isEqualTo(4);
     }
   }
 
@@ -41,11 +41,11 @@ class TestMovieListReading {
       Movie movie = movieList.getMovie(0);
       assertThat(movie.getName()).isEqualTo("Finding Nemo");
       assertThat(movie.getCategory()).isEqualTo(Category.KIDS);
-      assertThat(movie.getRating()).isEqualTo(5);
+      assertThat(movie.getAverageRating()).isEqualTo(5);
       movie = movieList.getMovie(1);
       assertThat(movie.getName()).isEqualTo("Star Wars");
       assertThat(movie.getCategory()).isEqualTo(Category.SCIFI);
-      assertThat(movie.getRating()).isEqualTo(3);
+      assertThat(movie.getAverageRating()).isEqualTo(3);
     }
   }
 }
