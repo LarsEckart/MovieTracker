@@ -139,7 +139,7 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     getContentPane().add(initButtonPanel());
 
     pack();
-    setSize(300, 650);
+    setSize(600, 600);
   }
 
   private JMenuBar initMenuBar() {
@@ -216,15 +216,37 @@ public class SwingMovieListEditorView extends JFrame implements MovieListEditorV
     detailPanel.setBorder(BorderFactory.createEmptyBorder(1, 10, 10, 10));
     detailPanel.add(initNameField());
     detailPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+    detailPanel.add(initRatingsPanel());
     detailPanel.add(initRatingCombo());
-    detailPanel.add(initRatingList());
-    detailPanel.add(initRatingSourceField());
-    detailPanel.add(initRatingValueField());
-    detailPanel.add(initRatingReviewField());
-    detailPanel.add(initAddRatingButton());
     detailPanel.add(Box.createRigidArea(new Dimension(0, 5)));
     detailPanel.add(initCategoryField());
     return detailPanel;
+  }
+
+  private Component initRatingsPanel() {
+    JPanel ratingsPane = new JPanel();
+    ratingsPane.setLayout(new BoxLayout(ratingsPane, BoxLayout.X_AXIS));
+    ratingsPane.setBorder(BorderFactory.createEtchedBorder());
+    ratingsPane.add(initRatingList());
+    ratingsPane.add(Box.createRigidArea(new Dimension(5, 0)));
+    ratingsPane.add(initRatingsDetailPane());
+    return ratingsPane;
+  }
+
+  private Component initRatingsDetailPane() {
+    JPanel addRatingPane = new JPanel();
+    addRatingPane.setLayout(new BoxLayout(addRatingPane, BoxLayout.Y_AXIS));
+
+    addRatingPane.setBorder(BorderFactory.createEmptyBorder(1, 10, 10, 10));
+    addRatingPane.add(initRatingValueField());
+    addRatingPane.add(Box.createRigidArea(new Dimension(0, 5)));
+    addRatingPane.add(initRatingSourceField());
+    addRatingPane.add(Box.createRigidArea(new Dimension(0, 5)));
+    addRatingPane.add(initRatingReviewField());
+    addRatingPane.add(Box.createRigidArea(new Dimension(0, 5)));
+    addRatingPane.add(initAddRatingButton());
+    addRatingPane.add(Box.createGlue());
+    return addRatingPane;
   }
 
   private Component initRatingReviewField() {
