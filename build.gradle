@@ -3,16 +3,6 @@ plugins {
 }
 
 repositories {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/LarsEckart/tcr-extension")
-            credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("GH_USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("GH_TOKEN")
-            }
-        }
-    }
     mavenCentral()
 }
 
@@ -25,7 +15,7 @@ dependencies {
     testImplementation("org.mockito:mockito-core:3.5.13")
     testImplementation("com.approvaltests:approvaltests:9.3.0")
     testImplementation("org.netbeans:jemmy:2.2.7.5")
-    testImplementation("com.github.larseckart:tcr-extension:0.3.0")
+    testImplementation("com.larseckart:junit-tcr-extensions:0.0.3")
 }
 
 tasks.withType(JavaCompile) {
