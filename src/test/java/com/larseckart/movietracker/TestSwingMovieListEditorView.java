@@ -7,10 +7,8 @@ import java.util.Vector;
 import javax.swing.ListModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.netbeans.jemmy.operators.JButtonOperator;
 import org.netbeans.jemmy.operators.JComboBoxOperator;
 import org.netbeans.jemmy.operators.JDialogOperator;
@@ -21,10 +19,7 @@ import org.netbeans.jemmy.operators.JTextAreaOperator;
 import org.netbeans.jemmy.operators.JTextFieldOperator;
 import org.netbeans.jemmy.util.NameComponentChooser;
 
-/**
- * I couldn't get it to work on travis linux machine.
- */
-@EnabledOnOs({OS.MAC})
+@DisabledIfEnvironmentVariable(named = "CI", matches = "true")
 class TestSwingMovieListEditorView {
 
   JFrameOperator mainWindow;

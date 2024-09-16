@@ -38,3 +38,4 @@ jobs:
         if: success() || failure()
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
+          retention-days: 1

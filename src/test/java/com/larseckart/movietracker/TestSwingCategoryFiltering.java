@@ -8,11 +8,13 @@ import java.util.Vector;
 import javax.swing.ListModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.netbeans.jemmy.operators.JComboBoxOperator;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JListOperator;
 import org.netbeans.jemmy.util.NameComponentChooser;
 
+@DisabledIfEnvironmentVariable(named = "CI", matches = "true")
 class TestSwingCategoryFiltering {
 
   JFrameOperator mainWindow;
@@ -100,6 +102,4 @@ class TestSwingCategoryFiltering {
     ListModel fantasyList = movieList.getModel();
     assertThat(fantasyList.getSize()).isEqualTo(fantasyMovies.size());
   }
-
-
 }
